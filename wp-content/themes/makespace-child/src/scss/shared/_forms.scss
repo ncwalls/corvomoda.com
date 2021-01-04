@@ -1,0 +1,89 @@
+.gform_fields {
+	@include clearfix;
+	list-style: none;
+	margin: 0 -1rem 1.5rem -1rem;
+	padding: 0;
+}
+
+.gfield {
+	float: left;
+	margin-bottom: 1.5rem;
+	padding: 0 1rem;
+	width: 100%;
+	
+	&.gf_left_half,
+	&.gf_right_half{
+		width: 50%;
+		
+		@media (max-width: $phablet) {
+			width: 100%;
+		}
+	}
+
+	label {
+		display: block;
+		line-height: 1;
+		margin-bottom: 0.5rem;
+	}
+
+	input,
+	select,
+	textarea {
+		display: block;
+		width: 100%;
+	}
+	textarea {
+		height: 10rem;
+	}
+
+}
+
+
+.gform_footer{
+	
+	button, input[type="button"], input[type="submit"], .button{
+		
+		&:hover{
+		}
+	}
+}
+
+.gfield_error {
+	input {
+		border: 1px solid $form-error-color;
+	}
+}
+
+.gform_wrapper {
+	.validation_message {
+
+		&.instruction {
+			color: $form-error-color;
+		}
+
+	}
+}
+
+.validation_error{
+	color: $form-error-color;
+	line-height: 1.3;
+	margin-bottom: 1rem;
+}
+
+.validation_message{
+	color: $form-error-color;
+	font-size: 1.4rem;
+}
+
+.gform_validation_container {
+	clip: rect(0,0,0,0);
+	height: 0;
+	left: -9999rem;
+	position: absolute;
+	width: 0;
+	z-index: -9999;
+}
+
+.gform_confirmation_message{
+	font-weight: 700;
+}

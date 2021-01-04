@@ -1,0 +1,29 @@
+.container {
+	@include clearfix();
+	margin-left: auto;
+	margin-right: auto;
+	max-width: $max-width;
+	width: $container-width;
+}
+
+.container__main {
+	float: left;
+	width: 75%;
+
+	&--no-sidebar {
+		width: 100%;
+	}
+
+	@media (max-width: $tablet) {
+		width: 100%;
+	}
+}
+
+.sidebar {
+	float: right;
+	width: 25%;
+
+	@media (max-width: $tablet) {
+		width: 100%;
+	}
+}
