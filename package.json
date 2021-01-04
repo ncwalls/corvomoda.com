@@ -52,12 +52,5 @@
     "slick-carousel": "1.*",
     "colors": "^1.2.3"
   },
-  "dependencies": {
-    "adm-zip": "^0.5.1",
-    "async": "^3.2.0",
-    "ncp": "^2.0.0",
-    "os": "^0.1.1",
-    "prompt": "^1.1.0",
-    "simple-git": "^2.31.0"
-  }
+  "dependencies": {}
 }
