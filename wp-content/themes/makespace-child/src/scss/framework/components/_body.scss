@@ -13,49 +13,59 @@ html {
 	outline: none;
 }
 body {
-	color: $brand-black;
+	background: #000;
+	color: #fff;
 	font-family: $font-family-base;
 	font-size: #{$font-size-base/10px}rem;
 	font-weight: $font-weight-base;
 	line-height: $line-height-base;
-	padding-top: $header-height;
+	// padding-top: $header-height;
+	padding-top: 4.9rem;
 
 	&.nav-ocn.nav-open {
 		overflow: hidden;
 	}
 
 	&.home {
-		padding-top: 0;
+		// padding-top: 0;
 	}
 
 	@media (max-width: $phablet) {
-		padding-top: $header-mobile-height;
+		// padding-top: $header-mobile-height;
 	}
 }
 .wrapper {
-	min-height: 100vh;
+	// min-height: 100vh;
+	// min-height: 100vh;
 	overflow: hidden;
+	position: relative;
 }
+
+.hentry{
+	
+}
+
 .skip-link,
 .screen-reader-text {
 	position: absolute!important;
-  overflow: hidden;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  clip: rect(0 0 0 0);
-  &:focus {
-    overflow: auto;
-    width: auto;
-    height: auto;
-    margin: 0;
-    clip: auto;
-    z-index: 10000;
-    padding: 15px;
-    background-color: #fff;
-    color: #43515c;
-    transition: none;
-  }
+	overflow: hidden;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	clip: rect(0 0 0 0);
+	
+	&:focus {
+		overflow: auto;
+		width: auto;
+		height: auto;
+		margin: 0;
+		clip: auto;
+		z-index: 10000;
+		padding: 15px;
+		background-color: #fff;
+		color: #43515c;
+		transition: none;
+	}
 }

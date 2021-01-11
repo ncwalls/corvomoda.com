@@ -1,91 +1,64 @@
 .site-header {
-	background-color: $header-bg-color;
-	height: $header-height;
-	left: 0;
+	background: #fff;
 	position: fixed;
+	left: 0;
 	right: 0;
 	top: 0;
-	z-index: 99;
+	text-align: center;
+	z-index: 101;
 
-	.inner.container {
+	.inner{
 		align-items: center;
 		display: flex;
-		height: 100%;
 		justify-content: space-between;
-		position: relative;
-
-		&:after{
-			display: none; //to fix flex justify
-		}
-	}
-
-	@media (max-width: $phablet) {
-		height: $header-mobile-height;
-	}
-}
-
-.site-header__menu {
-	text-align: right;
-
-	.menu {
-		li {
-			display: inline-block;
-		}
-	}
-
-	@media (max-width: $tablet) {
-		.menu {
-			display: none;
-		}
-	}
-}
-
-#large-nav-primary{
-
-	@media (max-width : $mobile-nav-breakpoint) {
-		display: none;
-	}
-	
-	.menu > li{
-		display: inline-block;
-	}
-	
-	.menu-item-has-children{
-		position: relative;
+		height: 5rem;
+		padding: 0 5.4rem 0 3.8rem;
 		
-		&:hover{
-			.sub-menu{
-				max-height: 100rem;
-				opacity: 1;
-			}
+		@media(max-width: $laptop){
+			padding: 0 3rem 0 2rem;
 		}
-		
-		.sub-menu{
-			max-height: 0;
-			opacity: 0;
-			overflow: hidden;
-			position: absolute;
-			top: 100%;
-			left: 50%;
-			text-align: left;
-			transform: translateX(-50%);
-			transition: all 0.3s;
-			white-space: nowrap;
+		@media(max-width: $tablet){
+			padding-right: 2rem;
+		}
+	}
 
-			li{
-				display: block;
-			}
-		}
+	.brand{
+		display: block;
+		width: 6rem;
 		
-		&.mega-menu-full{
-			position: static;
-			
-			.sub-menu{
-				left: 0;
-				transform: none;
-				width: 100vw;
-			}
+		@media(max-width: $phablet){
+			width: 4rem;
+		}
+
+		img{
+			display: block;
+			width: 100%;
 		}
 	}
 }
 
+.header-cart{
+	// color: #000;
+	// display: inline-block;
+	// font-size: 2rem;
+	// line-height: 1;
+	// margin-left: 3rem;
+	// padding-top: 1.4rem;
+	// position: relative;
+	// text-align: center;
+	// vertical-align: middle;
+
+	// .cart-count{
+	// 	font-size: 1.6rem;
+	// 	display: block;
+	// 	font-weight: 400;
+	// 	line-height: 1;
+	// 	position: absolute;
+	// 	top: 0;
+	// 	left: 0.8rem;
+	// }
+
+	// .fa-shopping-cart{
+	// 	font-weight: 700;
+	// }
+}

@@ -78,21 +78,17 @@
 			<?php endwhile; ?>
 		</div>
 		
-		<?php if(paginate_links()): ?>
-			<footer class="archive-pagination">
-				<div class="pagination-links">
-					<?php
-						$translated = __( 'Page ', 'mytextdomain' );
-						echo paginate_links( array(
-							'prev_text' => '<i class="fal fa-chevron-left"></i><span class="screen-reader-text">Previous Page</span></i>',
-							'next_text' => '<i class="fal fa-chevron-right"></i><span class="screen-reader-text">Next Page</span></i>',
-							'type' => 'plain',
-							'before_page_number' => '<span class="screen-reader-text">' . $translated . '</span>'
-						) );
-					?>
-				</div>
-			</footer>
-		<?php endif; ?>
+		<footer class="archive-pagination">
+			<?php
+				$translated = __( 'Page ', 'mytextdomain' );
+				echo paginate_links( array(
+					'prev_text' => '<i class="fa fa-angle-left"><span class="screen-reader-text">Previous Page</span></i>',
+					'next_text' => '<i class="fa fa-angle-right"><span class="screen-reader-text">Next Page</span></i>',
+					'type' => 'plain',
+					'before_page_number' => '<span class="screen-reader-text">' . $translated . '</span>'
+				) );
+			?>
+		</footer>
 	</div>
 
 <?php get_footer();

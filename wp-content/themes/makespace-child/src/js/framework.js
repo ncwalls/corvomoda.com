@@ -113,9 +113,10 @@
 
 			// Add sub-menu functionality when clicked.
 			// If a link is just a hash, toggle it on click.
-			$( 'body' ).on( 'click', '.menu-item-has-children > a', function(ev){
+			$( 'body' ).on( 'click', '.menu-item-has-children a', function(ev){
+				var isTrigger = /#/.test(this.href);
 				var thisParent = $( this ).parentsUntil('ul');
-				if( this.href == "#" ){
+				if( isTrigger ){
 					ev.preventDefault();
 					$( thisParent ).toggleClass( 'menu-item-open' );
 				}

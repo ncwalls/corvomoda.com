@@ -11,6 +11,14 @@ h6 {
 	margin: 0 0 1rem;
 	word-wrap: break-word;
 }
+h1{
+	font-size: 5rem;
+	margin-bottom: 3rem;
+
+	@media (max-width: $phablet) {
+		// font-size: 4rem;
+	}
+}
 p {
 	margin-bottom: 1rem;
 	margin-top: 0;
@@ -25,7 +33,7 @@ table {
 }
 
 ol, ul {
-	margin: 0 0 1rem 2rem;
+	margin: 1rem 0 1rem 2rem;
 	padding: 0;
 
 	ol, ul {
@@ -44,4 +52,40 @@ address {
 }
 [hidden] {
 	display: none !important;
+}
+
+.wysiwyg{
+	h2{
+		margin-top: 3rem;
+
+		&:first-child{
+			margin-top: 0;
+		}
+	}
+}
+
+.wp-block-button__link{
+	// background: $brand-blue;
+	// color: #fff;
+	// // border: 3px solid #000;
+	// box-shadow:0.3rem 0.7rem 0 rgba(0,0,50,0.1);
+	// border-radius: 0.5rem;
+	// display: inline-block;
+	// font-size: 2.8rem;
+	// margin: 2rem 0 0 0;
+	// padding: 1.2rem 3rem;
+	// text-align: center;
+	// transition: all 0.3s;
+
+	// &:visited{
+	// 	background: $brand-blue;
+	// 	color: #fff;
+	// }
+
+	// &:active,
+	// &:focus,
+	// &:hover{
+	// 	background: $brand-black;
+	// 	color: $brand-yellow;
+	// }
 }

@@ -9,36 +9,18 @@
 }
 
 .single-pagination{
-	line-height: 1;
-
 	ul{
-		align-items: center;
 		display: flex;
 		justify-content: space-between;
 		list-style: none;
 		margin: 0;
 		padding: 0;
 		text-align: center;
-		width: 100%;
-		
-		@media (max-width: $phablet) {
-			display: block;
-		}
 	}
 	
 	.item{
 		float: left;
 		width: 33.333%;
-		
-		@media (max-width: $phablet) {
-			float: none;
-			text-align: center !important;
-			width: 100%;
-
-			+ .item{
-				margin-top: 2rem;
-			}
-		}
 		
 		&.prev{
 			text-align: left;
@@ -50,11 +32,6 @@
 		
 		&.all{
 			text-align: center;
-		}
-	}
-
-	a{
-		&:hover{
 		}
 	}
 }

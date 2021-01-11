@@ -10,43 +10,43 @@
 	right: 0;
 	top: 0;
 	width: 100%;
-	z-index: -99997;
-	transition: opacity 400ms, visibility 0ms, z-index 0ms;
-	transition-delay: 0ms, 400ms, 400ms;
+	z-index: -1000;
+	transition: opacity 0.5s, visibility 0s, z-index 0s;
+	transition-delay: 0s, 0.5s, 0.5s;
 
 	.nav-open & {
 		opacity: 1;
 		visibility: visible;
-		transition-delay: 0ms, 0ms, 0ms;
-		z-index: 99997;
+		transition-delay: 0.1s, 0s, 0s;
+		z-index: 1000;
 	}
 }
 #ocn {
-	z-index: 99998;
-}
-
-#ocn {
-	background: #fff;
-	bottom: 0;
+	background: none;
+	// bottom: 0;
 	position: fixed;
-	overflow-y: scroll;
+	// overflow-y: scroll;
+	overflow: hidden;
 	right: 0;
 	top: 0;
 	width: 280px;
 	z-index: 99998;
-	transform: translateX(100%);
-	transition: transform 400ms;
-	transition-delay: 0ms;
+	transform: translateY(-100%);
+	transition: transform 0.5s;
+	// transition-delay: 0ms;
+	z-index: 99998;
 
 	.nav-open & {
-		box-shadow: 0 0 4px #000;
-		transform: translateX(0);
-		transition-delay: 200ms;
+		// box-shadow: 0 0 4px $brand-black;
+		transform: translateY(0);
+		// transition-delay: 200ms;
 	}
+}
 
-	#ocn-inner {
-		@include clearfix;
-	}
+#ocn-inner {
+	background: #fff;
+	@include clearfix;
+	padding-bottom: 20px;
 }
 
 #ocn-top {
@@ -57,27 +57,32 @@
 	position: relative;
 }
 #ocn-brand {
-	max-width: 180px;
+	display: block;
+	width: 70px;
+
+	img{
+		display: block;
+	}
 }
 #ocn-close {
 	background: transparent;
 	border: none;
 	border-radius: 0;
 	display: block;
-	height: 32px;
+	height: 28px;
 	padding: 0;
 	position: relative;
-	right: -4px;
-	top: -2px;
-	width: 32px;
+	// right: -4px;
+	// top: -5px;
+	width: 28px;
 
 	&:before,
 	&:after {
-		background: $brand-black;
-		border-radius: 2px;
+		background: $brand-red;
+		border-radius: 1px;
 		content: '';
 		display: block;
-		height: 4px;
+		height: 2px;
 		top: 50%;
 		left: 0;
 		position: absolute;
@@ -92,6 +97,8 @@
 }
 
 #ocn-nav-primary {
+	font-size: 24px;
+
 	.menu {
 		> li {
 			position: relative;
@@ -102,9 +109,15 @@
 			}
 
 			a {
+				color: #000;
 				display: block;
 				padding: 10px 20px;
 				position: relative;
+				text-decoration: none;
+
+				&:hover{
+					color: $brand-red;
+				}
 			}
 			.ocn-sub-menu-button{
 				display: none;
@@ -168,61 +181,49 @@
 	}
 }
 
+.ocn-bottom{
+	background: url(assets/body-top.png) no-repeat 0 top;
+	background-size: 100% auto;
+	height: 130px;
+	position: relative;
+	top: -2px;
+	transition: background-size 0.8s;
+
+	.nav-open & {
+		background-size: 250% auto;
+	}
+}
+
 
 #nav-toggle {
-	display: none;
+	display: block;
 	background: transparent;
-	border: 0;
-	border-radius: 0;
-	height: 22px;
+	border-top: 3px solid #000;
+	border-bottom: 3px solid #000;
+	border-right: 0;
+	border-left: 0;
+	height: 18px;
 	line-height: 1;
 	padding: 0;
 	position: relative;
 	right: 0;
-	width: 34px;
+	width: 33px;
 
-	&:before,
-	&:after,
-	.middle-bar{
-		background: $brand-black;
-		border-radius: 2px;
-		display: block;
-		height: 4px;
-		transition: transform 0.3s;
-		transition-delay: 0ms;
-	}
 
-	&:before,
-	&:after{
+	&:before{
+		background: #000;
+		height: 3px;
 		content: '';
+		display: block;
 		position: absolute;
+		top: 50%;
 		right: 0;
 		left: 0;
-	}
-	&:before{
-		top: 0;
-		transition-delay: 0;
+		transform: translateY(-50%);
 	}
 	
-	&:after{
-		bottom: 0;
-		transition-delay: 0.2s;
-	}
-
-	.middle-bar{
-		transition-delay: 0.1s;
-	}
-
-	@media (max-width : $mobile-nav-breakpoint) {
-		display: block;
-	}
 }
 .nav-open {
 	#nav-toggle {
-		&:before,
-		&:after,
-		.middle-bar{
-			transform: translateX(200%);
-		}
 	}
 }

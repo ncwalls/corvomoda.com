@@ -15,7 +15,7 @@
 	&.gf_right_half{
 		width: 50%;
 		
-		@media (max-width: $phablet) {
+		@media (max-width: $tablet) {
 			width: 100%;
 		}
 	}

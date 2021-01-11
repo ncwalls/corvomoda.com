@@ -82,31 +82,18 @@
 
 .archive-pagination{
 	text-align: center;
-
-	.pagination-links{
-		display: inline-block;
-		white-space: nowrap;
-	}
 	
 	.page-numbers{
-		line-height: 1;
-		margin: 0 0.5rem;
-		vertical-align: middle;
-
 		&.current{
 			
 		}
 		
 		&.prev{
-			font-size: 3rem;
-			font-weight: 300;
-			margin: 0 2rem 0 0;
+			
 		}
 		
 		&.next{
-			font-size: 3rem;
-			font-weight: 300;
-			margin: 0 0 0 2rem;
+			
 		}
 	}
 }

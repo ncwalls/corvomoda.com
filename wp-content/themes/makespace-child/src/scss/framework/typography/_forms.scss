@@ -3,7 +3,7 @@ input[type="button"],
 input[type="submit"],
 select,
 option {
-	appearance: none;
+	// appearance: none;
 	cursor: pointer;
 }
 
@@ -13,55 +13,89 @@ label {
 	font-weight: inherit;
 }
 
-button,
+// button,
 input[type="button"],
 input[type="submit"],
-.button {
-	background-color: $button-color;
+.button,
+.wp-block-button__link {
+	background: #fff;
+	border-radius: 0.1rem;
 	border: 0;
-	border-radius: 5px;
+	color: #000;
 	cursor: pointer;
 	display: inline-block;
 	font-family: inherit;
-	font-size: inherit;
+	font-size: 2.8rem;
 	font-style: normal;
 	line-height: normal;
-	padding: 1rem 3rem;
-	transition: all 0.25s;
+	padding: 1.2rem 3rem;
+	text-align: center;
+	transition: all 0.3s;
 
-	&:hover {
-		background-color: $button-hover;
+	&:visited{
+		background: #fff;
+		color: #000;
+	}
+
+	&:active,
+	&:focus,
+	&:hover{
+		background: $brand-red;
+		color: #fff;
 	}
 }
 
-input[type="color"],
-input[type="date"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="email"],
-input[type="month"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="text"],
-input[type="time"],
-input[type="url"],
-input[type="week"],
-input:not([type]),
+// input[type="color"],
+// input[type="date"],
+// input[type="datetime"],
+// input[type="datetime-local"],
+// input[type="email"],
+// input[type="month"],
+// input[type="number"],
+// input[type="password"],
+// input[type="search"],
+// input[type="tel"],
+// input[type="text"],
+// input[type="time"],
+// input[type="url"],
+// input[type="week"],
+// input:not([type]),
+input,
 textarea,
 select,
-select[multiple] {
-	background: $input-background;
-	border: $input-border-width solid $input-border-color;
-	border-radius: $input-border-radius;
+select[multiple],
+.select2-container .selection{
+	background: #000;
+	border: 1px solid #fff;
+	border-radius: 0.1rem;
 	box-sizing: border-box;
-	box-shadow: none;
+	color: #fff;
 	display: block;
-	font-family: inherit;
-	font-size: inherit;
+	font-family: $font-family-base;
+	font-size: 1.8rem;
 	line-height: normal;
 	margin-bottom: 0;
-	padding: $input-padding;
+	padding: 1.5rem;
 	width: 100%;
+}
+
+.select2-container .selection{
+
+	.select2-selection{
+		border: 0;
+	}
+
+	.select2-selection__arrow{
+		top: 50%;
+		transform: translateY(-50%);
+
+		b{
+			// border-top-color: #000;
+		}
+	}
+}
+
+.select2-container--open{
+	// width: auto;
+	// border: 0;
 }

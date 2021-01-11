@@ -26,24 +26,20 @@
 					</div>
 				<?php endif; ?>
 			</div>
-			<footer class="single-pagination">
+			<footer>
 				<ul>
 					<li class="item prev">
 						<?php if( get_previous_post() ): $prev = get_previous_post(); ?>
-							<a title="Previous" href="<?php echo get_permalink( $prev->ID ); ?>">
-								<i class="fas fa-angle-left"></i> Previous
-							</a>
+							<a title="Previous post" href="<?php echo get_permalink( $prev->ID ); ?>"><?php echo $prev->post_title; ?></a>
 						<?php endif; ?>
-					</li>
-					<li class="item all">
-						<a title="All" href="<?php echo get_post_type_archive_link( 'staff_module' ); ?>">All</a>
 					</li>
 					<li class="item next">
 						<?php if( get_next_post() ): $next = get_next_post(); ?>
-							<a title="Next" href="<?php echo get_permalink( $next->ID ); ?>">
-								Next <i class="fas fa-angle-right"></i>
-							</a>
+							<a title="Next post" href="<?php echo get_permalink( $next->ID ); ?>"><?php echo $next->post_title; ?></a>
 						<?php endif; ?>
+					</li>
+					<li>
+						<a title="All posts" href="<?php echo get_post_type_archive_link( 'staff_module' ); ?>">Back to All</a>
 					</li>
 				</ul>
 			</footer>

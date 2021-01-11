@@ -1,3 +1,36 @@
 .home {
+	padding-top: 0;
+}
+
+.hero{
+	background: #fff;
+	// height: 100vh;
+	padding: 25vh 0;
+	position: relative;
+}
+
+.hero-logo{
+	display: block;
+	margin: 0 auto;
+	// position: absolute;
+	// top: 50%;
+	// right: 0;
+	// left: 0;
+	width: 40%;
+	// transform: translateY(-50%);
+	max-width: 60rem;
 	
+	@media(max-width: $laptop){
+		width: 50%;
+	}
+	@media(max-width: $tablet){
+		max-width: 30rem;
+		width: 80%;
+	}
+}
+
+.main{
+	.container{
+		max-width: 100rem;
+	}
 }

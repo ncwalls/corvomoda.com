@@ -51,7 +51,7 @@ class MakespaceChild {
 
 	function after_setup_theme(){
 		// add_theme_support( 'case-studies-module' );
-		add_theme_support( 'locations-module' );
+		// add_theme_support( 'locations-module' );
 		// add_theme_support( 'staff-module' );
 	}
 
@@ -72,11 +72,11 @@ class MakespaceChild {
 			wp_enqueue_script('google-maps', $google_api_key, true);
 		endif;
 
-		wp_enqueue_script( 'theme', get_stylesheet_directory_uri() . '/scripts.min.js', array( 'jquery' ), filemtime( get_stylesheet_directory() . '/scripts.min.js' ) );
+		wp_enqueue_script( 'theme', get_stylesheet_directory_uri() . '/scripts.min.js', array( 'jquery' ) );
 		wp_localize_script( 'theme', 'MSWObject', $msw_object );
 
-		//wp_enqueue_style( 'google-fonts', '', [], null );
-		wp_enqueue_style( 'theme', get_stylesheet_uri(), array(), filemtime( get_stylesheet_directory() . '/style.css' ) );
+		wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap', [], null );
+		wp_enqueue_style( 'theme', get_stylesheet_uri(), array() );
 	}
 
 	function msw_acf_init() {
@@ -86,6 +86,10 @@ class MakespaceChild {
 	}
 
 	function msw_loaded() {
+		// add_theme_support( 'woocommerce', array(
+		// 	'thumbnail_image_width' => 500
+		// ) );
+		
 		// Custom Thumbnail Sizes
 		add_theme_support( 'post-thumbnails' );
 		// add_image_size( 'blog-image', 400, 300, true ); // Example
@@ -140,6 +144,181 @@ class MakespaceChild {
 		return $url;
 	}
 
+	static function obfuscate_email($email) {
+		$output = '';
+
+		for ($i = 0; $i < (strlen($email)); $i++) {
+			$output .= '&#' . ord($email[$i]) . ';';
+		}
+		
+
+		return $output;
+	}
+
 }
 
 $MakespaceChild = new MakespaceChild();
+
+
+
+/* woocom stuff */
+remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10, 0);
+remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10, 0);
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
+
+
+add_action( 'woocommerce_before_single_product', 'product_back_link', 15);
+add_action( 'woocommerce_before_single_product', 'woocommerce_template_single_title', 20);
+add_action( 'woocommerce_single_product_summary', 'before_product_options', 5);
+// add_action( 'woocommerce_single_product_summary', 'share_product', 30);
+// add_action( 'woocommerce_single_product_summary', 'after_cart_buttons', 55);
+add_action('woocommerce_after_shop_loop_item_title', 'archive_color_list', 30 );
+add_action('woocommerce_after_shop_loop_item_title', 'starting_price', 40 );
+
+add_filter( 'woocommerce_get_image_size_thumbnail', function( $size ) {
+	return array(
+		'width'  => 500,
+		'height' => 500,
+		'crop'   => 1,
+	);
+} );
+
+function before_product_options(){
+	global $product;
+
+	echo '<h3>Pick a size and color.</h3>';
+}
+
+function archive_color_list(){
+	global $product;
+
+	if($product->get_variation_attributes()){
+		echo '<ul class="colors">';
+		$product_attr = $product->get_variation_attributes();
+		$product_colors = $product_attr['Colors'];
+		foreach ($product_colors as $c) {
+			$c_class = preg_replace('/\s+/', '_', strtolower($c));
+			echo '<li class="' . $c_class . '">' . $c . '</li>';
+		}
+		echo '</ul>';
+	}
+}
+
+function starting_price(){
+	global $product;
+	// if ( $price_html = $product->get_price_html() ) {
+		echo '<span class="price">';
+		// print_r($product);
+		// echo $price_html;
+
+	    if($product->get_available_variations()){
+			$product_variations = $product->get_available_variations();
+
+			#2 Get one variation id of a product
+			$variation_product_id = $product_variations [0]['variation_id'];
+
+			#3 Create the product object
+			$variation_product = new WC_Product_Variation( $variation_product_id );
+
+			#4 Use the variation product object to get the variation prices
+		    if( $product->is_on_sale() ) {
+				$price = wc_price( $variation_product->get_sale_price() );
+			}
+			else{
+				$price = wc_price( $variation_product->get_regular_price() );
+			}
+			echo $price;
+		}
+		else{
+			 echo $product->get_price_html();
+		    // if( $product->is_on_sale() ) {
+		    //     echo $product->sale_price;
+		    // }
+		    // else{
+		    // 	echo $product->regular_price;
+		    // }
+		}
+
+
+		echo '</span>';
+	// }
+}
+
+add_filter( 'woocommerce_pagination_args', 	'rocket_woo_pagination' );
+function rocket_woo_pagination( $args ) {
+
+	$args['prev_text'] = '<i class="fal fa-angle-left"></i>';
+	$args['next_text'] = '<i class="fal fa-angle-right"></i>';
+
+	return $args;
+}
+
+/**
+ * Change number of products that are displayed per page (shop page)
+ */
+add_filter( 'loop_shop_per_page', 'new_loop_shop_per_page', 20 );
+function new_loop_shop_per_page( $number ) {
+  // $cols contains the current number of products per page based on the value stored on Options –> Reading
+  // Return the number of products you wanna show per page.
+  $number = 12;
+  return $number;
+}
+
+
+add_action('wp_ajax_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
+add_action('wp_ajax_nopriv_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');        
+function woocommerce_ajax_add_to_cart() {
+    $product_id = apply_filters('woocommerce_add_to_cart_product_id', absint($_POST['product_id']));
+    $quantity = empty($_POST['quantity']) ? 1 : wc_stock_amount($_POST['quantity']);
+    $variation_id = absint($_POST['variation_id']);
+    $passed_validation = apply_filters('woocommerce_add_to_cart_validation', true, $product_id, $quantity);
+    $product_status = get_post_status($product_id);
+
+    if ($passed_validation && WC()->cart->add_to_cart($product_id, $quantity, $variation_id) && 'publish' === $product_status) {
+
+        do_action('woocommerce_ajax_added_to_cart', $product_id);
+
+        if ('yes' === get_option('woocommerce_cart_redirect_after_add')) {
+            wc_add_to_cart_message(array($product_id => $quantity), true);
+        }
+
+        WC_AJAX :: get_refreshed_fragments();
+    } else {
+
+        $data = array(
+            'error' => true,
+            'product_url' => apply_filters('woocommerce_cart_redirect_after_error', get_permalink($product_id), $product_id));
+
+        echo wp_send_json($data);
+    }
+
+    wp_die();
+}
+
+
+add_filter( 'woocommerce_add_to_cart_fragments', 'iconic_cart_count_fragments', 10, 1 );
+function iconic_cart_count_fragments( $fragments ) {
+    $fragments['span.cart-count'] = '<span class="cart-count">' . WC()->cart->get_cart_contents_count() . '</span>';
+    return $fragments;
+}
+
+
+function product_back_link(){
+	echo '<a href="' . get_permalink(get_option( 'woocommerce_shop_page_id' )) . '" class="">&lt; Back to Shop</a>';
+}
+
+function share_product(){
+	echo '<div class="product-share">
+		<div class="product-share-title">
+			 <i class="fas fa-share"></i> Share
+		</div>';
+	echo do_shortcode('[addtoany]');
+	echo '</div>';
+}
+
+function after_cart_buttons(){
+	echo '<div class="after-cart-buttons">after buttons</div>';
+}

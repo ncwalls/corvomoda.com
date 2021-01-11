@@ -1,5 +1,11 @@
 a {
+	color: #fff;
 	text-decoration: underline;
+	transition: color 0.3s;
+
+	&:hover{
+		// text-decoration: underline;
+	}
 
 	nav &,
 	&.button {

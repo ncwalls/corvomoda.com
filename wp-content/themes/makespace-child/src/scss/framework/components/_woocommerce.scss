@@ -5,7 +5,7 @@
 	----------------------------------------------------------------------*/
 	$products_padding: 1.5; // (Percentage)
 
-  	.products {
+  	/*.products {
   		list-style: none;
   		display: grid;
   		margin: auto;
@@ -59,7 +59,7 @@
 
   			}
   		}
-  	}
+  	}*/
 
 	/*----------------------------------------------------------------------
 	  CART
@@ -218,7 +218,7 @@
 	  CHECKOUT
 	----------------------------------------------------------------------*/
 	$checkout_columns: 2; // Form columns
-	$checkout_margins: 0.5; // (Percentage)
+	$checkout_margins: 1; // (Percentage)
 	$checkout_alignment: right;
 
 	@if $checkout_alignment == right {
@@ -237,6 +237,9 @@
 	.woocommerce-checkout {
 		dl {
 			font-size: .75em;
+		}
+		.required{
+			text-decoration: none;
 		}
 		.woocommerce-billing-fields__field-wrapper,
 		.woocommerce-shipping-fields__field-wrapper {
@@ -286,21 +289,22 @@
 		.wc_payment_methods {
 			list-style: none;
 			margin: 0;
-			li {
-				display: flex;
-				flex-wrap: wrap;
-				align-items: flex-start;
-				margin: 0 ($checkout_margins * 1%);
-				justify-content: $checkout_justify;
-				img {
-					margin: 0;
-				}
-			}
-			input {
-				margin-#{$checkout_auto}: auto;
-				margin-#{$checkout_alignment}: ($checkout_margins * 1%);
-				margin-top: ($checkout_margins * 1%);
-			}
+			padding: 0;
+			// li {
+			// 	display: flex;
+			// 	flex-wrap: wrap;
+			// 	align-items: flex-start;
+			// 	margin: 0 ($checkout_margins * 1%);
+			// 	justify-content: $checkout_justify;
+			// 	img {
+			// 		// margin: 0;
+			// 	}
+			// }
+			// input {
+			// 	margin-#{$checkout_auto}: auto;
+			// 	margin-#{$checkout_alignment}: ($checkout_margins * 1%);
+			// 	margin-top: ($checkout_margins * 1%);
+			// }
 			.payment_box {
 				width: 100%;
 			}
