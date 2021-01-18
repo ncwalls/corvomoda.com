@@ -16,7 +16,7 @@
 		// });
 
 		//https://quadmenu.com/add-to-cart-with-woocommerce-and-ajax-step-by-step/
-
+		var cartForm = $('form.cart');
 		var addToCartButton = $('.single_add_to_cart_button');
 
 		if($('input.variation_id').length > 0){
@@ -36,9 +36,9 @@
 			});
 		}
 
-		var afterCartHtml = '<div class="after-cart-button">';
-		afterCartHtml += 'Added to cart! Yay!';
-		afterCartHtml += '<a href="' + MSWObject.home_url + '/cart/" class="view-cart">View Cart</a>';
+		var afterCartHtml = '<div class="after-cart-buttons">';
+		afterCartHtml += '<p>Added to cart!</p>';
+		afterCartHtml += '<p><a href="' + MSWObject.home_url + '/cart/" class="view-cart">View Cart</a></p>';
 		afterCartHtml += '</div>';
 
 		addToCartButton.on('click', function(e){
@@ -51,7 +51,8 @@
 			}
 			else{
 				var productCartUrl = thisButton.attr('href');
-				var productId = thisButton.attr('data-id');
+				// var productId = thisButton.attr('data-id');
+				var productId = cartForm.attr('data-product_id');
 				var productQty = 1;
 
 				if($('input.qty').length && $('input.qty').val()){
@@ -101,10 +102,28 @@
 	    });
 	};
 
+	var numberInputIncrement = function () {
+		$(".numberinput-increment").on("click", function (e) {
+			var thisObj = $(this);
+			var theInput = thisObj.siblings('input[type="number"]');
+			var inputMin = theInput.attr('min') || 0;
+			var inputMax = theInput.attr('max') || 100000;
+			var theVal = parseInt(theInput.val());
+			if (thisObj.hasClass("up") && theVal < inputMax) {
+				theVal++;
+			} else if (thisObj.hasClass("down") && theVal > inputMin) {
+				theVal--;
+			}
+			// console.log(theVal);
+			theInput.val(theVal).trigger("change");
+		});
+	};
+
 
 	$(document).ready(function(){
 		wooGallery();
 		wooAddToCart();
+		numberInputIncrement();
 	});
 
 })(jQuery);

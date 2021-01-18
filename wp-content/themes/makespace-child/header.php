@@ -57,10 +57,18 @@
 				<?php endwhile; ?>
 				</ul>
 			<?php endwhile; ?>*/ ?>
-			<button class="nav-toggle" type="button" id="nav-toggle">
-				<span class="screen-reader-text">menu</span>
-			</button>
+			<div class="header-right">
+				<?php global $woocommerce; ?>
+				<a class="header-cart" href="<?php echo wc_get_cart_url(); ?>">
+					<span class="cart-count"><?php echo $woocommerce->cart->cart_contents_count; ?></span>
+					<i class="far fa-shopping-cart"></i>
+				</a>
+				<button class="nav-toggle" type="button" id="nav-toggle">
+					<span class="screen-reader-text">menu</span>
+				</button>
+			</div>
 		</div>
+
 		<?php
 			/*if( 'dropdown' == get_field( 'menu_type', 'option' ) ){
 				wp_nav_menu( array(

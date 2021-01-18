@@ -19,7 +19,7 @@ input[type="submit"],
 .button,
 .wp-block-button__link {
 	background: #fff;
-	border-radius: 0.1rem;
+	border-radius: 0.4rem;
 	border: 0;
 	color: #000;
 	cursor: pointer;
@@ -67,7 +67,7 @@ select[multiple],
 .select2-container .selection{
 	background: #000;
 	border: 1px solid #fff;
-	border-radius: 0.1rem;
+	border-radius: 0.4rem;
 	box-sizing: border-box;
 	color: #fff;
 	display: block;
@@ -98,4 +98,42 @@ select[multiple],
 .select2-container--open{
 	// width: auto;
 	// border: 0;
+}
+
+
+.numberinput-wrapper{
+	overflow: hidden;
+	position: relative;
+
+	input{
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		background: none;
+		border: 0;
+		border-radius: 0;
+		display: block;
+		padding: 0 0 0 1rem;
+		width: 150%;
+	}
+
+	.numberinput-increment{
+		border-left: 0.7rem solid transparent;
+		border-right: 0.7rem solid transparent;
+		cursor: pointer;
+		position: absolute;
+		right: 0.5rem;
+		width: 0;
+		height: 0;
+
+		&.up{
+			border-bottom: 0.7rem solid #fff;
+			top: 0.7rem;
+		}
+
+		&.down{
+			border-top: 0.7rem solid #fff;
+			bottom: 0.7rem;
+		}
+	}
 }

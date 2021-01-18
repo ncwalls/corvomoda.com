@@ -170,13 +170,13 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
 
 
-add_action( 'woocommerce_before_single_product', 'product_back_link', 15);
+// add_action( 'woocommerce_before_single_product', 'product_back_link', 15);
 add_action( 'woocommerce_before_single_product', 'woocommerce_template_single_title', 20);
-add_action( 'woocommerce_single_product_summary', 'before_product_options', 5);
-// add_action( 'woocommerce_single_product_summary', 'share_product', 30);
+// add_action( 'woocommerce_single_product_summary', 'before_product_options', 5);
+add_action( 'woocommerce_product_after_tabs', 'share_product', 30);
 // add_action( 'woocommerce_single_product_summary', 'after_cart_buttons', 55);
 add_action('woocommerce_after_shop_loop_item_title', 'archive_color_list', 30 );
-add_action('woocommerce_after_shop_loop_item_title', 'starting_price', 40 );
+add_action('woocommerce_single_product_summary', 'starting_price', 5 );
 
 add_filter( 'woocommerce_get_image_size_thumbnail', function( $size ) {
 	return array(
@@ -189,7 +189,7 @@ add_filter( 'woocommerce_get_image_size_thumbnail', function( $size ) {
 function before_product_options(){
 	global $product;
 
-	echo '<h3>Pick a size and color.</h3>';
+	// echo '<h3>Pick a size and color.</h3>';
 }
 
 function archive_color_list(){
@@ -210,7 +210,7 @@ function archive_color_list(){
 function starting_price(){
 	global $product;
 	// if ( $price_html = $product->get_price_html() ) {
-		echo '<span class="price">';
+		echo '<div class="price">';
 		// print_r($product);
 		// echo $price_html;
 
@@ -243,7 +243,7 @@ function starting_price(){
 		}
 
 
-		echo '</span>';
+		echo '</div>';
 	// }
 }
 
@@ -263,7 +263,7 @@ add_filter( 'loop_shop_per_page', 'new_loop_shop_per_page', 20 );
 function new_loop_shop_per_page( $number ) {
   // $cols contains the current number of products per page based on the value stored on Options –> Reading
   // Return the number of products you wanna show per page.
-  $number = 12;
+  $number = 50;
   return $number;
 }
 
@@ -290,7 +290,10 @@ function woocommerce_ajax_add_to_cart() {
 
         $data = array(
             'error' => true,
-            'product_url' => apply_filters('woocommerce_cart_redirect_after_error', get_permalink($product_id), $product_id));
+            'product_id' =>  $product_id,
+            'variation_id' =>  $variation_id,
+            'post' => $_POST,
+            'product_url' => apply_filters('woocommerce_cart_redirect_after_error', get_permalink($variation_id), $variation_id));
 
         echo wp_send_json($data);
     }
@@ -305,11 +308,6 @@ function iconic_cart_count_fragments( $fragments ) {
     return $fragments;
 }
 
-
-function product_back_link(){
-	echo '<a href="' . get_permalink(get_option( 'woocommerce_shop_page_id' )) . '" class="">&lt; Back to Shop</a>';
-}
-
 function share_product(){
 	echo '<div class="product-share">
 		<div class="product-share-title">
@@ -319,6 +317,24 @@ function share_product(){
 	echo '</div>';
 }
 
-function after_cart_buttons(){
-	echo '<div class="after-cart-buttons">after buttons</div>';
+// function after_cart_buttons(){
+// 	echo '<div class="after-cart-buttons">';
+// 	// product_back_link();
+// 	echo '</div>';
+// }
+
+
+function product_back_link(){
+	echo '<a href="' . get_permalink(get_option( 'woocommerce_shop_page_id' )) . '" class="back-link">&lt; Keep Shopping</a>';
 }
+
+function msw_woo_qty_before(){
+	echo '<div class="numberinput-wrapper">';
+}
+function msw_woo_qty_after(){
+	echo '<div class="numberinput-increment up"></div>';
+	echo '<div class="numberinput-increment down"></div>';
+	echo '</div>';
+}
+add_action('woocommerce_before_quantity_input_field', 'msw_woo_qty_before', 10, 0);
+add_action('woocommerce_after_quantity_input_field', 'msw_woo_qty_after', 10, 0);
