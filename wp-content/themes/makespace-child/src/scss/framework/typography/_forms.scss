@@ -9,8 +9,9 @@ option {
 
 label {
 	cursor: pointer;
-	font-family: inherit;
-	font-weight: inherit;
+	// font-family: inherit;
+	// font-weight: inherit;
+	font-size: 1.6rem;
 }
 
 // button,
@@ -65,18 +66,22 @@ textarea,
 select,
 select[multiple],
 .select2-container .selection{
-	background: #000;
+	background: #fff;
 	border: 1px solid #fff;
 	border-radius: 0.4rem;
 	box-sizing: border-box;
-	color: #fff;
+	color: #000;
 	display: block;
 	font-family: $font-family-base;
 	font-size: 1.8rem;
 	line-height: normal;
 	margin-bottom: 0;
-	padding: 1.5rem;
+	padding: 1.2rem 1.5rem;
 	width: 100%;
+}
+
+textarea{
+	height: 12rem;
 }
 
 .select2-container .selection{
@@ -100,8 +105,14 @@ select[multiple],
 	// border: 0;
 }
 
+.select2-dropdown{
+	background: #fff;
+	color: #000;
+}
+
 
 .numberinput-wrapper{
+	border-radius: 0.4rem;
 	overflow: hidden;
 	position: relative;
 
@@ -113,7 +124,8 @@ select[multiple],
 		border: 0;
 		border-radius: 0;
 		display: block;
-		padding: 0 0 0 1rem;
+		// padding: 0 0 0 1rem;
+
 		width: 150%;
 	}
 
@@ -128,12 +140,16 @@ select[multiple],
 
 		&.up{
 			border-bottom: 0.7rem solid #fff;
-			top: 0.7rem;
+			// top: 0.7rem;
+			bottom: 50%;
+			transform: translateY(-100%);
 		}
 
 		&.down{
 			border-top: 0.7rem solid #fff;
-			bottom: 0.7rem;
+			// bottom: 0.7rem;
+			top: 50%;
+			transform: translateY(100%);
 		}
 	}
 }

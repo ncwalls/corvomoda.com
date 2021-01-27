@@ -597,8 +597,27 @@ $woo_green: #299E5F;
 				margin-top: 3rem;
 
 				.view-cart{
+					background: $brand-red;
+					border-radius: 0.4rem;
 					display: inline-block;
 					margin-left: 1rem;
+					padding: 1rem 1.5rem;
+					text-decoration: none;
+					transition: all 0.3s;
+
+					&:hover{
+						background: #fff;
+						color: #000;
+					}
+
+					i{
+						display: inline-block;
+						font-size: 1.2rem;
+						margin-right: 0.8rem;
+						position: relative;
+						top: -0.1rem;
+						vertical-align: middle;
+					}
 				}
 			}
 
@@ -678,12 +697,18 @@ $woo_green: #299E5F;
 
 		th,
 		td{
+			font-weight: 400;
 			padding: 1rem;
+		}
+
+		th{
+			font-size: 1.6rem;
 		}
 
 		.input-text{
 			background: #fff;
 			border-width: 0.2rem;
+			color: #000;
 		}
 		
 		.woocommerce-cart-form__cart-item{
@@ -694,18 +719,41 @@ $woo_green: #299E5F;
 
 		.product-remove{
 			a{
+				// background: #fff;
+				// border-radius: 50%;
+				// color: $brand-red;
+				// display: block;
 				font-size: 3rem;
+				// font-weight: 700;
 				text-decoration: none;
+				// width: 2.4rem;
+				// height: 2.4rem;
+				// text-align: center;
+				// line-height: 2.4rem;
+				// text-transform: uppercase;
 			}
 		}
 
 		.product-name{
 			text-align: left;
-			
 		}
 
 		.product-price{
 			width: 30%;
+		}
+		.product-quantity{
+			input{
+				// width: 3rem;
+			}
+
+			.numberinput-increment{
+				&.up{
+					border-bottom-color: #000;
+				}
+				&.down{
+					border-top-color: #000;
+				}
+			}
 		}
 		.product-subtotal{
 			width: 30%;
@@ -717,12 +765,17 @@ $woo_green: #299E5F;
 			padding-bottom: 3rem;
 
 			.coupon{
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+
 				label{
 					display: inline-block;
 				}
 
-				input{
+				#coupon_code{
 					display: inline-block;
+					margin: 0 1rem;
 				}
 				.button{
 					display: inline-block;
@@ -871,6 +924,15 @@ $woo_green: #299E5F;
 		.woocommerce-shipping-fields__field-wrapper input{
 			background: #fff;
 		}
+	}
+}
+.woocommerce-invalid{
+	input,
+	select,
+	.select2,
+	textarea{
+		border: 2px solid $brand-red;
+		border-radius: 0.4rem;
 	}
 }
 .woocommerce-shipping-fields{

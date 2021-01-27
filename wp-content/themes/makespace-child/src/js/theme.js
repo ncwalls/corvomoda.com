@@ -38,7 +38,7 @@
 
 		var afterCartHtml = '<div class="after-cart-buttons">';
 		afterCartHtml += '<p>Added to cart!</p>';
-		afterCartHtml += '<p><a href="' + MSWObject.home_url + '/cart/" class="view-cart">View Cart</a></p>';
+		afterCartHtml += '<p><a href="' + MSWObject.home_url + '/cart/" class="view-cart"><i class="fa fa-shopping-cart"></i>View Cart</a></p>';
 		afterCartHtml += '</div>';
 
 		addToCartButton.on('click', function(e){
@@ -103,27 +103,40 @@
 	};
 
 	var numberInputIncrement = function () {
-		$(".numberinput-increment").on("click", function (e) {
+		
+		$(document).on('click', '.numberinput-increment', function (e) {
 			var thisObj = $(this);
 			var theInput = thisObj.siblings('input[type="number"]');
 			var inputMin = theInput.attr('min') || 0;
 			var inputMax = theInput.attr('max') || 100000;
 			var theVal = parseInt(theInput.val());
-			if (thisObj.hasClass("up") && theVal < inputMax) {
+			if (thisObj.hasClass('up') && theVal < inputMax) {
 				theVal++;
-			} else if (thisObj.hasClass("down") && theVal > inputMin) {
+			} else if (thisObj.hasClass('down') && theVal > inputMin) {
 				theVal--;
 			}
 			// console.log(theVal);
-			theInput.val(theVal).trigger("change");
+			theInput.val(theVal).trigger('change');
+
+			if($('[name="update_cart"]').length){
+	        	$('[name="update_cart"]').trigger('click');
+	        }
 		});
 	};
+
+	// var updateCart = function(){
+	// 	$('.woocommerce-cart-form .product-quantity input').on('change', function(e){
+	// 		console.log('chng');
+ //        	$('[name="update_cart"]').trigger('click');
+ //        });
+	// };
 
 
 	$(document).ready(function(){
 		wooGallery();
 		wooAddToCart();
 		numberInputIncrement();
+		// updateCart();
 	});
 
 })(jQuery);

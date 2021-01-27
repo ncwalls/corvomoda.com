@@ -8,7 +8,7 @@
 </head>
 
 <body <?php body_class(); ?>>
-	<div id="ocn-overlay"></div>
+	<a href="javascript:void(0)" class="nav-toggle" id="ocn-overlay"></a>
 	<a class="visually-hidden skip-link" href="#MainContent">Skip to content</a>
 	<div id="ocn">
 		<div id="ocn-inner">

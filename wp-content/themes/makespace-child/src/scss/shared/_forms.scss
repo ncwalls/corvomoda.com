@@ -29,11 +29,14 @@
 	input,
 	select,
 	textarea {
+		background: #000;
+		border: 1px solid #fff;
+		color: #fff;
 		display: block;
 		width: 100%;
 	}
 	textarea {
-		height: 10rem;
+		// height: 15rem;
 	}
 
 }
