@@ -96,9 +96,16 @@ $woo_green: #299E5F;
 		overflow: hidden;
 		// padding: 2rem 0 0 0;
 
+		&:after{
+			content: '';
+			display: block;
+			flex-basis: 28%;
+			width: 28%;
+		}
+
 		li.product{
 			float: left;
-			margin: 0 0 8% 0;
+			margin: 0 0 3% 0;
 			// padding: 2rem;
 			text-align: center;
 			// width: 25%;
@@ -123,27 +130,129 @@ $woo_green: #299E5F;
 
 			a{
 				border: 1px solid #000;
-				border-radius: 0.4rem;
+				// border-radius: 0.4rem;
 				display: block;
 				padding: 2rem;
 				text-decoration: none;
-				transition: border 0.3s;
+				transition: border 0.5s;
 
 				&:hover{
 					border-color: $brand-red;
+
+					figure{
+						&:after{
+							// opacity: 0;
+							transform: scale(1.05);
+							// top: -5%;
+							// right: -5%;
+							// bottom: -5%;
+							// left: -5%;
+						}
+						img{
+							transform: scale(2) translateY(9%);
+						}
+					}
+				}
+			}
+
+			&:nth-child(4n + 1){
+				figure{
+					&:after{
+						// transform: rotate(0deg);
+					}
+				}
+
+				// a{
+				// 	&:hover{
+				// 		figure{
+				// 			&:after{
+				// 				transform: scale(1.05);
+				// 			}
+				// 		}
+				// 	}
+				// }
+			}
+			&:nth-child(4n + 2){
+				figure{
+					&:after{
+						transform: rotate(180deg);
+					}
+				}
+
+				a{
+					&:hover{
+						figure{
+							&:after{
+								transform: scale(1.05) rotate(180deg);
+							}
+						}
+					}
+				}
+			}
+			&:nth-child(4n + 3){
+				figure{
+					&:after{
+						transform: rotate(90deg);
+					}
+				}
+
+				a{
+					&:hover{
+						figure{
+							&:after{
+								transform: scale(1.05) rotate(90deg);
+							}
+						}
+					}
+				}
+			}
+			&:nth-child(4n + 4){
+				figure{
+					&:after{
+						transform: rotate(270deg);
+					}
+				}
+
+				a{
+					&:hover{
+						figure{
+							&:after{
+								transform: scale(1.05) rotate(270deg);
+							}
+						}
+					}
 				}
 			}
 
 			figure{
 				display: block;
 				margin-bottom: 2rem;
+				overflow: hidden;
+				position: relative;
+
+				&:after{
+					background: url(assets/product-frame.png) no-repeat center center;
+					background-size: cover;
+					content: '';
+					display: block;
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left: 0;
+					transition: all 0.7s;
+					z-index: 2;
+				}
 			}
 
 			img{
-				border-radius: 0.4rem;
+				// border-radius: 0.4rem;
 				display: block;
 				margin: 0;
+				position: relative;
+				transition: all 0.5s;
 				width: 100%;
+				z-index: 1;
 			}
 
 			.woocommerce-loop-product__title{

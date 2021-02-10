@@ -10,7 +10,9 @@
 					<?php
 					$products = get_posts(array(
 						'post_type' => 'product',
-						'posts_per_page' => -1
+						'posts_per_page' => -1,
+						'orderby' => 'menu_order',
+						'order' => 'ASC'
 					));
 					// print_r($products );
 					?>
@@ -26,11 +28,6 @@
 									</span>
 								</a>
 							</li>
-							<li class="product"><a href="<?php echo get_permalink($p->ID); ?>"><figure><img src="<?php echo get_the_post_thumbnail_url( $p->ID, 'medium' ); ?>" alt=""></figure><span class="woocommerce-loop-product__title"><?php echo get_the_title($p->ID); ?></span></a></li>
-							<li class="product"><a href="<?php echo get_permalink($p->ID); ?>"><figure><img src="<?php echo get_the_post_thumbnail_url( $p->ID, 'medium' ); ?>" alt=""></figure><span class="woocommerce-loop-product__title"><?php echo get_the_title($p->ID); ?></span></a></li>
-							<li class="product"><a href="<?php echo get_permalink($p->ID); ?>"><figure><img src="<?php echo get_the_post_thumbnail_url( $p->ID, 'medium' ); ?>" alt=""></figure><span class="woocommerce-loop-product__title"><?php echo get_the_title($p->ID); ?></span></a></li>
-							<li class="product"><a href="<?php echo get_permalink($p->ID); ?>"><figure><img src="<?php echo get_the_post_thumbnail_url( $p->ID, 'medium' ); ?>" alt=""></figure><span class="woocommerce-loop-product__title"><?php echo get_the_title($p->ID); ?></span></a></li>
-							<li class="product"><a href="<?php echo get_permalink($p->ID); ?>"><figure><img src="<?php echo get_the_post_thumbnail_url( $p->ID, 'medium' ); ?>" alt=""></figure><span class="woocommerce-loop-product__title"><?php echo get_the_title($p->ID); ?></span></a></li>
 						<?php endforeach; ?>
 					</ul>
 				</div>

@@ -20,6 +20,12 @@
 		}
 	}
 
+	&.hidden_label{
+		label{
+			display: none;
+		}
+	}
+
 	label {
 		display: block;
 		line-height: 1;
@@ -40,6 +46,8 @@
 	}
 
 }
+
+
 
 
 .gform_footer{
@@ -89,4 +97,9 @@
 
 .gform_confirmation_message{
 	font-weight: 700;
+}
+
+
+#field_1_6{
+	margin-bottom: 0;
 }

@@ -7,7 +7,7 @@
 	}
 
 	.hentry{
-		background: url(assets/body-top.png) no-repeat center top;
+		background: url(assets/hero-bottom.png) no-repeat center top;
 		background-size: 100% auto;
 		padding: 20rem 0 5rem 0;				
 					
@@ -40,7 +40,7 @@
 	// left: 0;
 	width: 40%;
 	// transform: translateY(-50%);
-	max-width: 60rem;
+	max-width: 50rem;
 	
 	@media(max-width: $laptop){
 		width: 50%;
