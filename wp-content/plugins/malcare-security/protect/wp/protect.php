@@ -40,7 +40,8 @@ class BVProtect {
 		$fwLogger = new BVLogger($this->db, BVFWConfig::$requests_table);
 
 		$fwConfHash = array_key_exists('fw', $config) ? $config['fw'] : array();
-		$fw = new BVFW($fwLogger, $fwConfHash, $ip, $bvinfo, $bvipstore);
+		$ruleSet = $this->getRuleSet();
+		$fw = new BVFW($fwLogger, $fwConfHash, $ip, $bvinfo, $bvipstore, $ruleSet);
 
 		if ($fw->isActive()) {
 
@@ -146,6 +147,14 @@ class BVProtect {
 
 	public function get_contdir() {
 		return defined('WP_CONTENT_DIR') ? WP_CONTENT_DIR . "/" : ABSPATH . "wp-content/";
+	}
+
+	public function getRuleSet() {
+		$ruleSet = $this->settings->getOption('bvruleset');
+		if ($ruleSet) {
+			return $ruleSet;
+		}
+		return array();
 	}
 }
 endif;

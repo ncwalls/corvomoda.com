@@ -1,7 +1,7 @@
 <div class="malcare9">
 	<section id="malcare-1">
 		<div class="malcare-logo-img text-center">
-			<img height="70" width="240" src="<?php echo plugins_url("/../img/mc-top-logo.png", __FILE__); ?>" alt="">
+			<img height="70" width="240" src="<?php echo plugins_url("/../img/mc-top-logo.svg", __FILE__); ?>" alt="">
 		</div>
 		<div class="container-malcare" id="">
 			<div class="row">
@@ -13,7 +13,7 @@
 							<input type='hidden' name='bvsrc' value='wpplugin' />
 							<input type='hidden' name='origin' value='protect' />
 							<?php echo $this->siteInfoTags(); ?>
-							<input type="text" placeholder="Enter your email address to continue" id="email" name="email" class="search" value="<?php echo get_option('admin_email');?>" required>
+							<input type="text" placeholder="Enter your email address to continue" id="email" name="email" class="search" required>
 							<h5 class="check-box-text mt-2"><input type="checkbox" class="check-box" name="consent" value="1">
 							<label>I agree to MalCare <a href="https://www.malcare.com/tos" target="_blank" rel="noopener noreferrer">Terms of Service</a> and <a href="https://www.malcare.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a></label></h5>
 							<button id="get-started" type="submit" class="e-mail-button"><span class="text-white">Submit</span></button>		

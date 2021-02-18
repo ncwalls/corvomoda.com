@@ -131,6 +131,7 @@
 			min-width: 33%;
 			max-width: 33%;
 			margin-left: auto;
+			white-space: nowrap;
 		}
 	}
 
@@ -155,8 +156,8 @@
 	}
 
 
-	@media (max-width: $mobile-nav-breakpoint) {
-		.woocommerce-cart-form {
+	@media (max-width: $tablet) {
+		/*.woocommerce-cart-form {
 			td, 
 			th {
 				padding: 0 .5em;
@@ -198,20 +199,20 @@
 				padding-left: 0;
 				text-align: right;
 			}
-			#coupon_code,
-			.button {
-				max-width: 100%;
-				min-width: 100%;
-			}
-		}
-		.cart-collaterals {
-			.cart-subtotal,
-			.order-total,
-			.button {
-				max-width: 100%;
-				min-width: 100%;
-			}
-		}
+			// #coupon_code,
+			// .button {
+			// 	max-width: 100%;
+			// 	min-width: 100%;
+			// }
+		}*/
+		// .cart-collaterals {
+		// 	.cart-subtotal,
+		// 	.order-total,
+		// 	.button {
+		// 		max-width: 100%;
+		// 		min-width: 100%;
+		// 	}
+		// }
 	}
 
 	/*----------------------------------------------------------------------

@@ -38,7 +38,7 @@ if (!class_exists('MCWPAction')) :
 		public static function uninstall() {
 			do_action('clear_pt_config');
 			do_action('clear_ip_store');
-		 	##CLEARDYNSYNCCONFIG##
+			##CLEARDYNSYNCCONFIG##
 		}
 
 		public function footerHandler() {

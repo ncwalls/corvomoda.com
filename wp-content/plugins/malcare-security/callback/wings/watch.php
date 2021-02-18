@@ -129,6 +129,16 @@ class BVWatchCallback extends BVCallbackBase {
 				}
 			}
 
+			if (array_key_exists('actlog', $params)) {
+				require_once dirname( __FILE__ ) . '/../../wp_actlog.php';
+				$actlog_params = $params['actlog'];
+				$limit = intval(urldecode($actlog_params['limit']));
+				$filter = urldecode($actlog_params['filter']);
+				$db->deleteBVTableContent(BVWPActLog::$actlog_table, $actlog_params['rmfilter']);
+				$table = $db->getBVTable(BVWPActLog::$actlog_table);
+				$resp["actlogs"] = $this->getData($table, $limit, $filter);
+			}
+
 			$resp["status"] = "done";
 			break;
 		case "rmdata":

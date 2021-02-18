@@ -15,6 +15,7 @@ class BVFWConfig {
 	public $cookiePath;
 	public $cookieDomain;
 	public $loggingMode;
+	public $rulesMode;
 
 	public static $requests_table = 'fw_requests';
 	public static $roleLevels = array(
@@ -36,6 +37,7 @@ class BVFWConfig {
 		$this->cookieKey = array_key_exists('cookiekey', $confHash) ? $confHash['cookiekey'] : "";
 		$this->cookiePath = array_key_exists('cookiepath', $confHash) ? $confHash['cookiepath'] : "";
 		$this->cookieDomain = array_key_exists('cookiedomain', $confHash) ? $confHash['cookiedomain'] : "";
+		$this->rulesMode = array_key_exists('rulesmode', $confHash) ? intval($confHash['rulesmode']) : BVFWConfig::DISABLED;
 	}
 	
 	#mode
@@ -77,10 +79,9 @@ class BVFWConfig {
 	const LOGGING_MODE_COMPLETE = 2;
 	const LOGGING_MODE_DISABLED = 3;
 
-	
-	#Valid mc_data filenames 
-	public static $validMcDataFilenames = array('mc.conf', 'mc_ips.conf');
-	public static $validDeletableFiles = array('mc.conf', 'mc_ips.conf', 'malcare-waf.php', 'mc.log', 'mc_data');
+	#Valid mc_data filenames (not used anywhere) 
+	public static $validMcDataFilenames = array('mc.conf', 'mc_ips.conf', 'mc_rules.json');
+	public static $validDeletableFiles = array('mc.conf', 'mc_ips.conf', 'malcare-waf.php', 'mc.log', 'mc_data', 'mc_rules.json');
 
 	public function isActive() {
 		return ($this->mode !== BVFWConfig::DISABLED);
@@ -112,6 +113,10 @@ class BVFWConfig {
 
 	public function isLoggingDisabled() {
 		return ($this->loggingMode === BVFWConfig::LOGGING_MODE_DISABLED);
+	}
+
+	public function isRulesModeEnabled() {
+		return ($this->rulesMode === BVFWConfig::PROTECT);
 	}
 }
 endif;

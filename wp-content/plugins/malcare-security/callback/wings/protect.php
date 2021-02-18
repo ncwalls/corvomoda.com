@@ -76,6 +76,17 @@ class BVProtectCallback extends BVCallbackBase {
 			$this->settings->updateOption('bvptconf', $params['conf']);
 			$resp = array('conf' => $this->settings->getOption('bvptconf'));
 			break;
+		case "gtrulcnf":
+			$resp = array('conf' => $this->settings->getOption('bvruleset'));
+			break;
+		case "clrrulcnf":
+			$this->settings->deleteOption('bvruleset');
+			$resp = array("clearconfig" => true);
+			break;
+		case "dorulcnf":
+			$this->settings->updateOption('bvruleset', $params['conf']);
+			$resp = array('conf' => $this->settings->getOption('bvruleset'));
+			break;
 		case "gtraddr":
 			$raddr = array_key_exists('REMOTE_ADDR', $_SERVER) ? $_SERVER['REMOTE_ADDR'] : false;
 			$resp = array("raddr" => $raddr);

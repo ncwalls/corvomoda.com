@@ -6,7 +6,7 @@ Donate link: https://www.malcare.com
 Requires at least: 4.0
 Tested up to: 5.6
 Requires PHP: 5.4.0
-Stable tag: 4.53
+Stable tag: 4.54
 License: GPLv2 or later
 License URI: [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -397,6 +397,13 @@ These are available on our website: [Terms of Service](https://www.malcare.com/t
 8. MalCare’s Uptime Monitoring notifies if a website goes down so that you can handle the situation before starting to lose visitors.
 
 == CHANGELOG ==
+= 4.54 =
+* Added Support For Multi Table Callbacks
+* Added Firewall Rule Evaluator
+* Added Activity Logs feature
+* Minor Improvements
+
+
 = 4.53 =
 * New UI for registration page
 * Bug Fixes

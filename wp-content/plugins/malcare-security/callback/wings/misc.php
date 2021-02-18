@@ -105,6 +105,10 @@ class BVMiscCallback extends BVCallbackBase {
 		case "setbvss":
 			$resp = array("status" => $settings->updateOption('bv_site_settings', $params['bv_site_settings']));
 			break;
+		case "stsrvcs":
+			$settings->updateOption($bvinfo->services_option_name, $params['services']);
+			$resp = array("stsrvcs" => $settings->getOption($bvinfo->services_option_name));
+			break;
 		default:
 			$resp = false;
 		}

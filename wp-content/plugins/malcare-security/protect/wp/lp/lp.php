@@ -183,10 +183,12 @@ class BVWPLP {
 			$this->setCategory(BVWPLP::UNBLOCKED);
 		} else {
 			$failed_attempts = $this->getLoginCount(BVWPLP::LOGINFAILURE, $this->ip);
-			if ($this->isBlacklistedIP()) {
+			if ($this->isWhitelistedIP()) {
+				$this->setCategory(BVWPLP::BYPASSED);
+			} else if ($this->isBlacklistedIP()) {
 				$this->setCategory(BVWPLP::BLACKLISTED);
 				$this->terminateLogin();
-			} else if ($this->isKnownLogin() || $this->isWhitelistedIP()) {
+			} else if ($this->isKnownLogin()) {
 				$this->setCategory(BVWPLP::BYPASSED);
 			} else if ($this->isLoginBlocked()) {
 				$this->setCategory(BVWPLP::ALLBLOCKED);

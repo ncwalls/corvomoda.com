@@ -11,10 +11,10 @@ class BVWPRequest {
   private $ip;
   private $method;
   private $path;
-  private $queryString;
+  private $getParams;
   private $timestamp;
   private $uri;
-	private $body;
+	private $postParams;
 	private $cookies;
 	private $respcode;
 	private $status;
@@ -27,9 +27,9 @@ class BVWPRequest {
 	const BYPASSED = 3;
 
 	#category
-	const BLACKLISTED = 1;
-	const WHITELISTED = 2;
-	const NORMAL      = 3;
+	const BLACKLISTED  = 1;
+	const WHITELISTED  = 2;
+	const NORMAL       = 3;
 
 	public function __construct($ip) {
 		$fileNames = array();
@@ -44,9 +44,9 @@ class BVWPRequest {
 		$this->setCategory(BVWPRequest::NORMAL);
 		$this->setStatus(BVWpRequest::ALLOWED);
 		$this->setTimestamp(time());
-		$this->setQueryString($_GET);
+		$this->setGetParams($_GET);
 		$this->setCookies($_COOKIE);
-		$this->setBody($_POST);
+		$this->setPostParams($_POST);
 		$this->setFiles($_FILES);
 		if (!empty($_FILES)) {
 			foreach ($_FILES as $input => $file) {
@@ -103,8 +103,8 @@ class BVWPRequest {
 		$this->category = $category;
 	}
 
-	public function setBody($body) {
-		$this->body = $body;
+	public function setPostParams($postParams) {
+		$this->postParams = $postParams;
 	}
 
 	public function setCookies($cookies) {
@@ -143,8 +143,8 @@ class BVWPRequest {
 		$this->path = $path;
 	}
 
-	public function setQueryString($queryString) {
-		$this->queryString = $queryString;
+	public function setGetParams($getParams) {
+		$this->getParams = $getParams;
 	}
 
 	public function setTimestamp($timestamp) {
@@ -155,8 +155,10 @@ class BVWPRequest {
 		$this->uri = $uri;
 	}
 
-	public function updateRulesInfo($key, $value) {
-		$this->rulesInfo[$key] = $value;
+	public function updateRulesInfo($category, $sub_category, $value) {
+		$rule_info = (array_key_exists($category, $this->rulesInfo)) ? $this->rulesInfo[$category] : array();
+		$rule_info[$sub_category] = $value;
+		$this->rulesInfo[$category] = $rule_info;
 	}
 	
 	public function getRulesInfo() {
@@ -227,15 +229,15 @@ class BVWPRequest {
 		}
 		return null;
 	}
-	
-	public function getBody() {
+
+	public function getPostParams() {
 		if (func_num_args() > 0) {
 			$args = func_get_args();
-			return $this->getKeyVal($this->body, $args);
+			return $this->getKeyVal($this->postParams, $args);
 		}
-		return $this->body;
+		return $this->postParams;
 	}
-	
+
 	public function getCookies() {
 		if (func_num_args() > 0) {
 			$args = func_get_args();
@@ -244,21 +246,33 @@ class BVWPRequest {
 		return $this->cookies;
 	}
 	
-	public function getQueryString() {
+	public function getGetParams() {
 		if (func_num_args() > 0) {
 			$args = func_get_args();
-			return $this->getKeyVal($this->queryString, $args);
+			return $this->getKeyVal($this->getParams, $args);
 		}
-		return $this->queryString;
+		return $this->getParams;
 	}
-	
+
+	public function getAllParams() {
+		return array("getParams" => $this->getParams, "postParams" => $this->postParams);
+	}
+
 	public function getHeader($key) {
 		if (array_key_exists($key, $this->headers)) {
 			return $this->headers[$key];
 		}
 		return null;
 	}
-	
+
+	public function getHeaders() {
+		if (func_num_args() > 0) {
+			$args = func_get_args();
+			return $this->getKeyVal($this->headers, $args);
+		}
+		return $this->headers;
+	}
+
 	public function getFiles() {
 		if (func_num_args() > 0) {
 			$args = func_get_args();
@@ -297,6 +311,23 @@ class BVWPRequest {
 
 	public function getTimestamp() {
 		return $this->timestamp;
+	}
+
+	public function getServerValue($key) {
+		if (isset($_SERVER) && array_key_exists($key, $_SERVER)) {
+			return $_SERVER[$key];
+		}
+		return false;
+	}
+
+	public function getUserRoleLevel() {
+			// TODO
+			// Handle prepend level using custom cookies.
+		return 0;
+	}
+
+	public function isUserRoleLevel($level) {
+		return ($level === $this->getUserRoleLevel());
 	}
 }
 endif;

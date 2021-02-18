@@ -5,7 +5,7 @@ Plugin URI: https://www.malcare.com
 Description: MalCare Security - Free Malware Scanner, Protection & Security for WordPress
 Author: MalCare Security
 Author URI: https://www.malcare.com
-Version: 4.53
+Version: 4.54
 Network: True
  */
 
@@ -146,5 +146,12 @@ if ((array_key_exists('bvplugname', $_REQUEST)) && ($_REQUEST['bvplugname'] == "
 	}
 
 	##DYNSYNCMODULE##
+	if ($bvinfo->isServiceActive('activity_log')) {
+		require_once dirname( __FILE__ ) . '/wp_actlog.php';
+		$bvconfig = $bvinfo->config;
+		$actlog = new BVWPActLog($bvdb, $bvsettings, $bvinfo, $bvconfig['activity_log']);
+		$actlog->init();
+	}
+
 	##WPAUTOUPDATEBLOCKMODULE##
 }

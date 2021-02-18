@@ -79,7 +79,7 @@
 	&:before,
 	&:after {
 		background: $brand-red;
-		border-radius: 1px;
+		border-radius: 0;
 		content: '';
 		display: block;
 		height: 2px;

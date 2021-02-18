@@ -3,6 +3,8 @@
 if (! (defined('ABSPATH') || defined('MCDATAPATH')) ) exit;
 if (!class_exists('BVFW')) :
 
+require_once dirname( __FILE__ ) . '/rule_evaluator.php';
+
 class BVFW {
 	public $bvinfo;
 	public $request;
@@ -10,6 +12,9 @@ class BVFW {
 	public $ipstore;
 	public $category;
 	public $logger;
+	public $ruleSet;
+	public $ruleEvaluator;
+	public $break_rule_evaluation;
 
 	const SQLIREGEX = '/(?:[^\\w<]|\\/\\*\\![0-9]*|^)(?:
 		@@HOSTNAME|
@@ -47,12 +52,15 @@ class BVFW {
 	const BYPASS_COOKIE = "bvfw-bypass-cookie";
 	const IP_COOKIE = "bvfw-ip-cookie";
 
-	public function __construct($logger, $confHash, $ip, $bvinfo, $ipstore) {
+	public function __construct($logger, $confHash, $ip, $bvinfo, $ipstore, $ruleSet) {
 		$this->config = new BVFWConfig($confHash);
 		$this->request = new BVWPRequest($ip);
 		$this->bvinfo = $bvinfo;
 		$this->ipstore = $ipstore;
 		$this->logger = $logger;
+		$this->ruleSet = $ruleSet;
+		$this->ruleEvaluator = new BVFWRuleEvaluator($this->request);
+		$this->break_rule_evaluation = false;
 	}
 
 	public function setcookie($name, $value, $expire) {
@@ -216,12 +224,12 @@ class BVFW {
 
 			if ($this->request->getMethod() === 'POST' &&
 				preg_match('/(admin-ajax.php|admin-post.php)$/', $this->request->getPath())) {
-				$result += $this->profileRequestInfo(array("action" => $this->request->getBody('action')),
+				$result += $this->profileRequestInfo(array("action" => $this->request->getPostParams('action')),
 					true, 'BODY[');
 			}
-			$result += $this->profileRequestInfo($this->request->getBody(),
+			$result += $this->profileRequestInfo($this->request->getPostParams(),
 					$this->config->isReqProfilingModeDebug(), 'BODY[');
-			$result += $this->profileRequestInfo($this->request->getQueryString(),
+			$result += $this->profileRequestInfo($this->request->getGetParams(),
 					true, 'GET[');
 			$result += $this->profileRequestInfo($this->request->getFiles(),
 					true, 'FILES[');
@@ -233,6 +241,13 @@ class BVFW {
 		if (!$this->canBypassFirewall() && $this->config->isProtecting()) {
 			if ($this->isBlacklistedIP()) {
 				$this->terminateRequest(BVWPRequest::BLACKLISTED);
+			}
+			if ($this->config->isRulesModeEnabled()) {
+				if ($this->ruleSet) {
+					$this->evaluateRules($this->ruleSet);
+				} else {
+					$this->request->updateRulesInfo('errors', 'ruleset', 'Invalid RuleSet');
+				}
 			}
 		}
 	}
@@ -344,13 +359,69 @@ class BVFW {
 						$result[$key]["file"] = true;
 					}
 
-					if ($this->matchCount(BVFW::SQLIREGEX, $value) >= 2) {
+					if ($this->matchCount(BVFW::SQLIREGEX, $value) > 2) {
 						$result[$key]["sql"] = true;
+					}
+
+					if (preg_match('/(?:\.{2}[\/]+)/', $value)) {
+						$result[$key]["path_traversal"] = true;
+					}
+
+					if (preg_match('/\\b(?i:eval)\\s*\\(\\s*(?i:base64_decode|exec|file_get_contents|gzinflate|passthru|shell_exec|stripslashes|system)\\s*\\(/', $value)) {
+						$result[$key]["php_eval"] = true;
 					}
 				}
 			}
 		}
 		return $result;
+	}
+
+	public function evaluateRules($ruleSet) {
+		foreach ($ruleSet as $rule) {
+			$id = $rule["id"];
+			$ruleLogic = $rule["rule_logic"];
+			$actions = $rule["actions"];
+			$min_rule_engine_ver = $rule["min_rule_engine_ver"];
+			$this->ruleEvaluator->resetErrors();
+
+			if (BVFWRuleEvaluator::VERSION >= $min_rule_engine_ver) {
+				if ($this->ruleEvaluator->evaluateRule($ruleLogic) && empty($this->ruleEvaluator->getErrors())) {
+					$this->request->updateRulesInfo('matched_rules', $id, null);
+					$this->executeActions($actions);
+				} elseif (!empty($this->ruleEvaluator->getErrors())) {
+					$this->request->updateRulesInfo("errors", (string) $id, $this->ruleEvaluator->getErrors());
+				}
+			}
+			if ($this->break_rule_evaluation) {
+				return;
+			}
+		}
+	}
+
+	function executeActions($actions){
+		foreach($actions as $action) {
+			switch ($action["type"]) {
+			case "ALLOW":
+				$this->break_rule_evaluation = true;
+				return;
+			case "BLOCK":
+				$this->terminateRequest(BVWPRequest::BLACKLISTED);
+				return;
+			case "INSPECT":
+				//TODO
+				//call_user_func_array(array($this, "profileRequestInfo"), $this->ruleEvaluator->getArgs($action["args"]));
+				break;
+			case "DEBUG":
+				//TODO
+				break;
+			case "SCRUB":
+				//TODO
+				break;
+			case "FILTER":
+				//TODO
+				break;
+			}
+		}
 	}
 }
 endif;

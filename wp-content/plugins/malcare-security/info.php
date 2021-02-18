@@ -4,21 +4,24 @@ if (!defined('ABSPATH')) exit;
 if (!class_exists('MCInfo')) :
 	class MCInfo {
 		public $settings;
+		public $config;
 		public $plugname = 'malcare';
 		public $brandname = 'MalCare';
 		public $badgeinfo = 'mcbadge';
 		public $ip_header_option = 'mcipheader';
 		public $brand_option = 'mcbrand';
-		public $version = '4.53';
+		public $version = '4.54';
 		public $webpage = 'https://www.malcare.com';
 		public $appurl = 'https://app.malcare.com';
 		public $slug = 'malcare-security/malcare.php';
 		public $plug_redirect = 'mcredirect';
 		public $logo = '../img/logo.png';
 		public $brand_icon = '/img/icon.png';
+		public $services_option_name = 'mcconfig';
 
 		public function __construct($settings) {
 			$this->settings = $settings;
+			$this->config = $this->settings->getOption($this->services_option_name);
 		}
 
 		public function canSetCWBranding() {
@@ -91,6 +94,14 @@ if ($bvinfo->canSetCWBranding()) {
 		public function isDynSyncModuleEnabled() {
 			return ($this->settings->getOption('bvdynplug') === $this->plugname) &&
 				$this->isActivePlugin();
+		}
+
+		public function isServiceActive($service) {
+			$bvconfig = $this->config;
+			if ($bvconfig && array_key_exists('services', $bvconfig)) {
+				return in_array($service, $bvconfig['services']) && $this->isActivePlugin();
+			}
+			return false;
 		}
 
 		public function isActivateRedirectSet() {

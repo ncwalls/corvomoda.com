@@ -14,10 +14,12 @@ require_once dirname( __FILE__ ) . '/logger.php';
 	class BVPrependProtect {
 		public $mcConfFile;
 		public $mcIPsFile;
+		public $mcRulesFile;
 
 		function __construct() {
 			$this->mcConfFile = MCDATAPATH .  MCCONFKEY .	'-' . 'mc.conf';
 			$this->mcIPsFile = MCDATAPATH . MCCONFKEY . '-' . 'mc_ips.conf';
+			$this->mcRulesFile = MCDATAPATH . MCCONFKEY . '-' . 'mc_rules.json';
 		}
 
 		public function parseFile($fname) {
@@ -36,6 +38,7 @@ require_once dirname( __FILE__ ) . '/logger.php';
 		public function run() {
 			$mcConf = $this->parseFile($this->mcConfFile);
 			$mcIPsConf = $this->parseFile($this->mcIPsFile);
+			$mcRuleSet = $this->parseFile($this->mcRulesFile);
 
 			if (!array_key_exists('time', $mcConf) || !isset($mcConf['time']) || !($mcConf['time'] > time() - (48*3600))) {
 				return false;
@@ -55,7 +58,7 @@ require_once dirname( __FILE__ ) . '/logger.php';
 			$fwlogger = new BVPrependLogger();
 
 			$fwConfHash = array_key_exists('fw', $mcConf) ? $mcConf['fw'] : array();
-			$fw = new BVFW($fwlogger, $fwConfHash, $ip, $bvinfo, $bvipstore);
+			$fw = new BVFW($fwlogger, $fwConfHash, $ip, $bvinfo, $bvipstore, $mcRuleSet);
 
 			if ($fw->isActive()) {
 

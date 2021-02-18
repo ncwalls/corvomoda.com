@@ -211,6 +211,7 @@ class BVInfoCallback extends BVCallbackBase {
 		$data['protect'] = $settings->getOption('bvptconf');
 		$data['brand'] = $settings->getOption($this->bvinfo->brand_option);
 		$data['badgeinfo'] = $settings->getOption($this->bvinfo->badgeinfo);
+		$data[$this->bvinfo->services_option_name] = $this->bvinfo->config;
 	}
 
 	public function dbconf(&$info) {
