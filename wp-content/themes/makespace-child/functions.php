@@ -170,6 +170,9 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
 
 
+
+add_action('woocommerce_before_shop_loop_item_title', 'loop_img_wrap_open', 5);
+add_action('woocommerce_before_shop_loop_item_title', 'loop_img_wrap_close', 15);
 // add_action( 'woocommerce_before_single_product', 'product_back_link', 15);
 add_action( 'woocommerce_before_single_product', 'woocommerce_template_single_title', 20);
 // add_action( 'woocommerce_single_product_summary', 'before_product_options', 5);
@@ -186,6 +189,13 @@ add_filter( 'woocommerce_get_image_size_thumbnail', function( $size ) {
 	);
 } );
 
+function loop_img_wrap_open(){
+	echo '<figure>';
+}
+function loop_img_wrap_close(){
+	echo '</figure>';
+}
+
 function before_product_options(){
 	global $product;
 
@@ -195,15 +205,17 @@ function before_product_options(){
 function archive_color_list(){
 	global $product;
 
-	if($product->get_variation_attributes()){
-		echo '<ul class="colors">';
-		$product_attr = $product->get_variation_attributes();
-		$product_colors = $product_attr['Colors'];
-		foreach ($product_colors as $c) {
-			$c_class = preg_replace('/\s+/', '_', strtolower($c));
-			echo '<li class="' . $c_class . '">' . $c . '</li>';
+	if ($product->product_type == 'variable') {
+		if($product->get_variation_attributes()){
+			echo '<ul class="colors">';
+			$product_attr = $product->get_variation_attributes();
+			$product_colors = $product_attr['Colors'];
+			foreach ($product_colors as $c) {
+				$c_class = preg_replace('/\s+/', '_', strtolower($c));
+				echo '<li class="' . $c_class . '">' . $c . '</li>';
+			}
+			echo '</ul>';
 		}
-		echo '</ul>';
 	}
 }
 
@@ -328,13 +340,34 @@ function product_back_link(){
 	echo '<a href="' . get_permalink(get_option( 'woocommerce_shop_page_id' )) . '" class="back-link">&lt; Keep Shopping</a>';
 }
 
-function msw_woo_qty_before(){
-	echo '<div class="numberinput-wrapper">';
+add_filter( 'woocommerce_return_to_shop_redirect', 'product_shop_link');
+function product_shop_link(){
+	return home_url();
 }
-function msw_woo_qty_after(){
-	echo '<div class="numberinput-increment up"></div>';
-	echo '<div class="numberinput-increment down"></div>';
-	echo '</div>';
+
+// function msw_woo_qty_before(){
+// 	echo '<div class="numberinput-wrapper">';
+// }
+// function msw_woo_qty_after(){
+// 	echo '<div class="numberinput-increment up"></div>';
+// 	echo '<div class="numberinput-increment down"></div>';
+// 	echo '</div>';
+// }
+// add_action('woocommerce_before_quantity_input_field', 'msw_woo_qty_before', 10, 0);
+// add_action('woocommerce_after_quantity_input_field', 'msw_woo_qty_after', 10, 0);
+
+/**
+ * Change number of related products output
+ */ 
+function woo_related_products_limit() {
+  global $product;
+	
+	$args['posts_per_page'] = 3;
+	return $args;
 }
-add_action('woocommerce_before_quantity_input_field', 'msw_woo_qty_before', 10, 0);
-add_action('woocommerce_after_quantity_input_field', 'msw_woo_qty_after', 10, 0);
+add_filter( 'woocommerce_output_related_products_args', 'jk_related_products_args', 20 );
+function jk_related_products_args( $args ) {
+	$args['posts_per_page'] = 3; // 4 related products
+	$args['columns'] = 3; // arranged in 2 columns
+	return $args;
+}

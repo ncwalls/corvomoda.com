@@ -26,6 +26,21 @@
 									<span class="woocommerce-loop-product__title">
 										<?php echo get_the_title($p->ID); ?>
 									</span>
+									<?php 
+										$woo_product = wc_get_product( $p->ID );
+										if ($woo_product->product_type == 'variable') {
+											if($woo_product->get_variation_attributes()){
+												echo '<ul class="colors">';
+												$product_attr = $woo_product->get_variation_attributes();
+												$product_colors = $product_attr['Colors'];
+												foreach ($product_colors as $c) {
+													$c_class = preg_replace('/\s+/', '_', strtolower($c));
+													echo '<li class="' . $c_class . '">' . $c . '</li>';
+												}
+												echo '</ul>';
+											}
+										}
+									?>
 								</a>
 							</li>
 						<?php endforeach; ?>

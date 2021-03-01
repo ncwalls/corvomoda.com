@@ -1,0 +1,76 @@
+2021-03-01T02:16:47+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::get_variation_attributes() in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\functions.php:208
+Stack trace:
+#0 C:\xampp\htdocs\corvomoda.com\wp-includes\class-wp-hook.php(287): archive_color_list('')
+#1 C:\xampp\htdocs\corvomoda.com\wp-includes\class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#2 C:\xampp\htdocs\corvomoda.com\wp-includes\plugin.php(484): WP_Hook->do_action(Array)
+#3 C:\xampp\htdocs\corvomoda.com\wp-content\plugins\woocommerce\templates\content-product.php(57): do_action('woocommerce_aft...')
+#4 C:\xampp\htdocs\corvomoda.com\wp-includes\template.php(732): require('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\corvomoda.com\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#6 C:\xampp\htdocs\corvomoda.com\wp-content\plugins\woocommerce\templates\single-product\related.php(43): wc_get_template_part('content', 'product')
+#7 C:\xampp\htdocs\corvomoda.com in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\functions.php on line 208
+
+2021-03-01T02:17:05+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::get_variation_attributes() in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\functions.php:208
+Stack trace:
+#0 C:\xampp\htdocs\corvomoda.com\wp-includes\class-wp-hook.php(287): archive_color_list('')
+#1 C:\xampp\htdocs\corvomoda.com\wp-includes\class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#2 C:\xampp\htdocs\corvomoda.com\wp-includes\plugin.php(484): WP_Hook->do_action(Array)
+#3 C:\xampp\htdocs\corvomoda.com\wp-content\plugins\woocommerce\templates\content-product.php(57): do_action('woocommerce_aft...')
+#4 C:\xampp\htdocs\corvomoda.com\wp-includes\template.php(732): require('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\corvomoda.com\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#6 C:\xampp\htdocs\corvomoda.com\wp-content\plugins\woocommerce\templates\single-product\related.php(43): wc_get_template_part('content', 'product')
+#7 C:\xampp\htdocs\corvomoda.com in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\functions.php on line 208
+
+2021-03-01T02:17:35+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::get_variation_attributes() in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\functions.php:208
+Stack trace:
+#0 C:\xampp\htdocs\corvomoda.com\wp-includes\class-wp-hook.php(287): archive_color_list('')
+#1 C:\xampp\htdocs\corvomoda.com\wp-includes\class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#2 C:\xampp\htdocs\corvomoda.com\wp-includes\plugin.php(484): WP_Hook->do_action(Array)
+#3 C:\xampp\htdocs\corvomoda.com\wp-content\plugins\woocommerce\templates\content-product.php(57): do_action('woocommerce_aft...')
+#4 C:\xampp\htdocs\corvomoda.com\wp-includes\template.php(732): require('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\corvomoda.com\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#6 C:\xampp\htdocs\corvomoda.com\wp-content\plugins\woocommerce\templates\single-product\related.php(43): wc_get_template_part('content', 'product')
+#7 C:\xampp\htdocs\corvomoda.com in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\functions.php on line 208
+
+2021-03-01T02:17:48+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::get_available_variations() in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\functions.php:227
+Stack trace:
+#0 C:\xampp\htdocs\corvomoda.com\wp-includes\class-wp-hook.php(287): starting_price('')
+#1 C:\xampp\htdocs\corvomoda.com\wp-includes\class-wp-hook.php(311): WP_Hook->apply_filters('', Array)
+#2 C:\xampp\htdocs\corvomoda.com\wp-includes\plugin.php(484): WP_Hook->do_action(Array)
+#3 C:\xampp\htdocs\corvomoda.com\wp-content\plugins\woocommerce\templates\content-single-product.php(60): do_action('woocommerce_sin...')
+#4 C:\xampp\htdocs\corvomoda.com\wp-includes\template.php(732): require('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\corvomoda.com\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#6 C:\xampp\htdocs\corvomoda.com\wp-content\plugins\woocommerce\templates\single-product.php(37): wc_get_template_part('content', 'single-product')
+#7 C:\xampp\htdocs\corvomoda.com in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\functions.php on line 227
+
+2021-03-01T02:39:37+00:00 CRITICAL Uncaught Error: Call to undefined method WP_Post::get_variation_attributes() in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\front-page.php:31
+Stack trace:
+#0 C:\xampp\htdocs\corvomoda.com\wp-includes\template-loader.php(106): include()
+#1 C:\xampp\htdocs\corvomoda.com\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\corvomoda.com\index.php(17): require('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\front-page.php on line 31
+
+2021-03-01T02:39:54+00:00 CRITICAL Uncaught Error: Call to undefined method WP_Post::get_variation_attributes() in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\front-page.php:31
+Stack trace:
+#0 C:\xampp\htdocs\corvomoda.com\wp-includes\template-loader.php(106): include()
+#1 C:\xampp\htdocs\corvomoda.com\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\corvomoda.com\index.php(17): require('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\front-page.php on line 31
+
+2021-03-01T02:39:58+00:00 CRITICAL Uncaught Error: Call to undefined method WP_Post::get_variation_attributes() in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\front-page.php:31
+Stack trace:
+#0 C:\xampp\htdocs\corvomoda.com\wp-includes\template-loader.php(106): include()
+#1 C:\xampp\htdocs\corvomoda.com\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\corvomoda.com\index.php(17): require('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\front-page.php on line 31
+
+2021-03-01T02:39:59+00:00 CRITICAL Uncaught Error: Call to undefined method WP_Post::get_variation_attributes() in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\front-page.php:31
+Stack trace:
+#0 C:\xampp\htdocs\corvomoda.com\wp-includes\template-loader.php(106): include()
+#1 C:\xampp\htdocs\corvomoda.com\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\corvomoda.com\index.php(17): require('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\corvomoda.com\wp-content\themes\makespace-child\front-page.php on line 31
+

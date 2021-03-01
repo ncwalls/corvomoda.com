@@ -6,7 +6,7 @@ $font-weight-base:     400;
 $font-family-headline: $font-family-base;
 $font-weight-headline: 400;
 $font-family-callout:  $font-family-base;
-$font-size-base:       18px;
+$font-size-base:       17px;
 $line-height-base:     1.5;
 
 
@@ -15,6 +15,7 @@ $line-height-base:     1.5;
 ----------------------------------------------------------------------*/
 $brand-black: #000;
 $brand-red: #cf0000;
+$brand-grey-md: #555;
 // $brand-yellow: #F6EB3A;
 
 /* Social media colors */
@@ -25,6 +26,10 @@ $pinterest-red:    #cb2027;
 $twitter-blue:     #2daae1;
 $youtube-red:      #e14e42;
 
+/* woocom colors */
+$woo-border: $brand-red;
+$woo-highlight: rgba(#fff, 0.1);
+$woo-highlight-text: #fff;
 
 /*----------------------------------------------------------------------
   FORMS

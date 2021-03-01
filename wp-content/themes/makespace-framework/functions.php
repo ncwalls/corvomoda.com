@@ -31,7 +31,7 @@ class MakespaceFramework {
 
 	function __construct(){
 		include_once( get_template_directory() . '/functions-pluggable.php' );
-		include_once( get_template_directory() . '/functions-woocommerce.php' );
+		// include_once( get_template_directory() . '/functions-woocommerce.php' );
 		// include_once( get_template_directory() . '/includes/acf/acf-makespace.php' );
 		include_once( get_template_directory() . '/includes/tgmpa/class-tgm-plugin-activation.php' );
 
@@ -81,7 +81,7 @@ class MakespaceFramework {
 		add_filter( 'tablepress_use_default_css', '__return_false' );
 		add_filter( 'the_generator', '__return_false' );
 		add_filter( 'tiny_mce_plugins', array( $this, 'disable_emojicons_tinymce' ) );
-		add_filter( 'woocommerce_breadcrumb_defaults', array( $this, 'woocommerce_breadcrumb_defaults' ) );
+		// add_filter( 'woocommerce_breadcrumb_defaults', array( $this, 'woocommerce_breadcrumb_defaults' ) );
 		add_filter( 'woocommerce_enqueue_styles', '__return_false' );
 		add_filter( "mce_external_plugins", array( $this, "msw_add_buttons" ) );
 		add_filter( 'mce_buttons_3', array( $this, 'msw_mce_buttons' ) );
@@ -100,8 +100,8 @@ class MakespaceFramework {
 
 		// Universal Cleanup
 		remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-		remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end' );
-		remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper' );
+		// remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end' );
+		// remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper' );
 		remove_action( 'wp_head', 'feed_links' );
 		remove_action( 'wp_head', 'wp_generator' );
 		remove_action( 'wp_head', 'wlwmanifest_link' );

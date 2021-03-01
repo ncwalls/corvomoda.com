@@ -3,7 +3,7 @@ html {
 	font-size: 10px;
 
 	@media(min-width: $fullsize){
-		font-size: #{1000px/$design-width}vw;
+		// font-size: #{1000px/$design-width}vw;
 	}
 }
 *,

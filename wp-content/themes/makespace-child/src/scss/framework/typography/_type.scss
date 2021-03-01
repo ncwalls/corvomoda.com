@@ -7,12 +7,13 @@ h6 {
 	color: inherit;
 	font-family: $font-family-headline;
 	font-weight: $font-weight-headline;
-	line-height: normal;
+	line-height: 1.1;
 	margin: 0 0 1rem;
 	word-wrap: break-word;
 }
 h1{
 	font-size: 5rem;
+	line-height: 1;
 	margin-bottom: 3rem;
 
 	@media (max-width: $phablet) {

@@ -31,6 +31,7 @@ input[type="submit"],
 	font-style: normal;
 	line-height: normal;
 	padding: 1.2rem 3rem;
+	position: relative;
 	text-align: center;
 	transition: all 0.3s;
 
@@ -66,13 +67,14 @@ input,
 textarea,
 select,
 select[multiple],
-.select2-container .selection{
-	background: #fff;
-	border: 1px solid #fff;
+.select2-container .selection,
+.numberinput-wrapper{
+	background: #000;
+	border: 1px solid $brand-grey-md;
 	// border-radius: 0.4rem;
 	border-radius: 0;
 	box-sizing: border-box;
-	color: #000;
+	color: #fff;
 	display: block;
 	font-family: $font-family-base;
 	font-size: 1.8rem;
@@ -80,6 +82,11 @@ select[multiple],
 	margin-bottom: 0;
 	padding: 1.2rem 1.5rem;
 	width: 100%;
+}
+
+input.select2-search__field{
+	background: #fff;
+	color: #000;
 }
 
 textarea{
@@ -99,6 +106,11 @@ textarea{
 		b{
 			// border-top-color: #000;
 		}
+	}
+
+	.select2-selection__rendered{
+		background: #000;
+		color: #fff;
 	}
 }
 
@@ -128,7 +140,7 @@ textarea{
 		border-radius: 0;
 		display: block;
 		// padding: 0 0 0 1rem;
-
+		padding: 0;
 		width: 150%;
 	}
 
