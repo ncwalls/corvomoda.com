@@ -472,8 +472,9 @@ form.checkout.woocommerce-checkout{
 	float: right;
 	margin-right: 0;
 }
-.woocommerce-checkout #ship-to-different-address-checkbox { width: auto; float: right; margin-left: 15px; margin-top: 10px; opacity: 1; position: static; }
-.woocommerce-checkout #ship-to-different-address label { font-size: 24px;   font-weight: 700; line-height: 1; margin: 0; margin-bottom: 1em; padding: 0; text-transform: uppercase; color: #000; }
+.woocommerce-checkout #ship-to-different-address-checkbox { width: auto; float: left; margin-right: 10px; margin-top: 7px; opacity: 1; position: static; }
+// .woocommerce-checkout #ship-to-different-address label { font-size: 24px;   font-weight: 700; line-height: 1; margin: 0; margin-bottom: 1em; padding: 0; text-transform: uppercase; color: #000; }
+.woocommerce-checkout #ship-to-different-address label {  font-size: 1.8rem; }
 .woocommerce-checkout .woocommerce form .form-row.create-account label { padding-top: 2px; font-weight: bold; }
 
 .woocommerce-checkout .payment-fixed { position: fixed; z-index: 9; box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 2em; left: 52%; margin-left: 0; padding: 20px; top: 0; width: 45.5% !important; -webkit-transition: padding .1s ease-in; -moz-transition: padding .1s ease-in; -o-transition: padding .1s ease-in; -ms-transition: padding .1s ease-in; transition: padding .1s ease-in; }

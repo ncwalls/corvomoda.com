@@ -588,7 +588,7 @@ $woo_green: #299E5F;
 				.quantity{
 					// align-items: center;
 					// border: 1px solid #fff;
-					display: inline-block;
+					display: block;
 					float: none;
 					// height: 5rem;
 					margin: 0;
@@ -598,16 +598,17 @@ $woo_green: #299E5F;
 					vertical-align: middle;
 					// width: 11rem;
 
-					// &:before{
-					// 	color: #fff;
-					// 	content: 'Quantity';
-					// 	display: inline-block;
-					// 	// font-family: $font-family-headline;
-					// 	margin-right: 1rem;
-					// 	// text-transform: uppercase;
-					// }
+					&:before{
+						color: #fff;
+						content: 'Quantity';
+						display: inline-block;
+						// font-family: $font-family-headline;
+						margin-right: 1rem;
+						// text-transform: uppercase;
+					}
 
 					.qty{
+						display: inline-block;
 						width: 6rem;
 					}
 
@@ -730,6 +731,7 @@ $woo_green: #299E5F;
 				}
 			}
 
+
 			.after-cart-buttons{
 				margin-top: 3rem;
 
@@ -767,18 +769,18 @@ $woo_green: #299E5F;
 			}
 
 			.woocommerce-tabs.wc-tabs-wrapper{
-				clear: right;
-				float: right;
+				clear: both;
+				float: left;
 				margin-top: 3rem;
 				// text-align: center;
-				width: 50%;
+				width: 100%;
 			
 				@media(max-width: $laptop){
-					width: 40%;
+					// width: 40%;
 				}
 				@media(max-width: $tablet){
-					clear: both;
-					width: 100%;
+					// clear: both;
+					// width: 100%;
 				}
 
 				h2{
@@ -920,7 +922,61 @@ $woo_green: #299E5F;
 	}
 }
 
+.ppc-button-wrapper{
+	margin-top: 1rem;
+	
+	&:before{
+		color: #fff;
+		content: '— OR —';
+		display: block;
+		margin-bottom: 1rem;
+		text-align: center;
 
+		.woocommerce-checkout #order_review &{
+			display: none;
+		}
+	}
+}
+#add_payment_method #payment div.payment_box .form-row,
+.woocommerce-cart #payment div.payment_box .form-row,
+.woocommerce-checkout #payment div.payment_box .form-row{
+
+}
+.woocommerce-checkout{
+	fieldset{
+		padding: 1rem;
+	}
+	.wc-credit-card-form,
+	.wc-payment-form{
+		.form-row{
+			// margin: 0 !important;
+			padding: 0 !important;
+
+			&.form-row-wide{
+				clear: both;
+				width: 100%;
+			}
+			&.form-row-first{
+				float: left;
+				width: 47%;
+			}
+			&.form-row-last{
+				float: right;
+				width: 47%;
+			}
+
+			label{
+				font-size: 0.9em;
+				line-height: 1;
+			}
+		}
+	}
+	.woocommerce-SavedPaymentMethods-saveNew{
+		label{
+			line-height: 1.3 !important;
+		}
+	}
+}
 /* cart */
 // .woocommerce-message{
 // 	margin-bottom: 2rem;

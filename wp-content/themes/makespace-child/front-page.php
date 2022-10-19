@@ -28,7 +28,7 @@
 									</span>
 									<?php 
 										$woo_product = wc_get_product( $p->ID );
-										if ($woo_product->product_type == 'variable') {
+										if ($woo_product->get_type() == 'variable') {
 											if($woo_product->get_variation_attributes()){
 												echo '<ul class="colors">';
 												$product_attr = $woo_product->get_variation_attributes();

@@ -38,10 +38,12 @@ class MakespaceChild {
 		if ( is_singular() ) {
 			$post_type = get_post_type();
 			$field_name = $post_type . '_parent';
-			$archive_parent = get_field( $field_name, 'option' )->ID;
+			$archive_parent = get_field( $field_name, 'option' );
 
-			if( isset( $archive_parent ) ){
-				array_push( $archive_crumbs, array_pop( $crumbs ), array_pop( $crumbs ), array('id' => $archive_parent) );
+			if( $archive_parent ){
+				$archive_parent_id = $archive_parent->ID;
+				
+				array_push( $archive_crumbs, array_pop( $crumbs ), array_pop( $crumbs ), array('id' => $archive_parent_id) );
 				$archive_crumbs = array_reverse( $archive_crumbs);
 				$crumbs = array_merge( $crumbs, $archive_crumbs);
 			}
@@ -170,7 +172,6 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
 
 
-
 add_action('woocommerce_before_shop_loop_item_title', 'loop_img_wrap_open', 5);
 add_action('woocommerce_before_shop_loop_item_title', 'loop_img_wrap_close', 15);
 // add_action( 'woocommerce_before_single_product', 'product_back_link', 15);
@@ -180,6 +181,10 @@ add_action( 'woocommerce_product_after_tabs', 'share_product', 30);
 // add_action( 'woocommerce_single_product_summary', 'after_cart_buttons', 55);
 add_action('woocommerce_after_shop_loop_item_title', 'archive_color_list', 30 );
 add_action('woocommerce_single_product_summary', 'starting_price', 5 );
+
+add_filter('woocommerce_paypal_payments_single_product_renderer_hook', function() {
+    return 'woocommerce_after_add_to_cart_button';
+});
 
 add_filter( 'woocommerce_get_image_size_thumbnail', function( $size ) {
 	return array(
@@ -205,7 +210,7 @@ function before_product_options(){
 function archive_color_list(){
 	global $product;
 
-	if ($product->product_type == 'variable') {
+	if ($product->get_type() == 'variable') {
 		if($product->get_variation_attributes()){
 			echo '<ul class="colors">';
 			$product_attr = $product->get_variation_attributes();
@@ -370,4 +375,81 @@ function jk_related_products_args( $args ) {
 	$args['posts_per_page'] = 3; // 4 related products
 	$args['columns'] = 3; // arranged in 2 columns
 	return $args;
+}
+
+
+/*************************************************
+some spam blocks for the default contact form
+************************************************/
+add_filter( 'gform_validation', 'custom_validation' );
+function custom_validation( $validation_result ) {
+	$form = $validation_result['form'];
+
+	if($form['id'] == 1){
+
+		$firstname = rgpost( 'input_1' );
+		$lastname = rgpost( 'input_2' );
+		$email = rgpost( 'input_3' );
+		$phone = rgpost( 'input_4' );
+		$textarea = rgpost( 'input_5' );
+
+		if ( $firstname == $lastname ) {
+
+			// set the form validation to false
+			$validation_result['is_valid'] = false;
+
+			foreach( $form['fields'] as &$field ) {
+
+				if ( $field->id == '1' || $field->id == '2' ) {
+					$field->failed_validation = true;
+					$field->validation_message = 'This field is invalid!';
+
+					if ( $field->id == '2' ) {
+						break;
+					}
+				}
+			}
+		}
+
+		elseif($email == "eric.jones.z.mail@gmail.com"){
+			$validation_result['is_valid'] = false;
+
+			foreach( $form['fields'] as &$field ) {
+				if ( $field->id == '3' ) {
+					$field->failed_validation = true;
+					$field->validation_message = 'This email is invalid!';
+					break;
+				}
+			}
+		}
+
+		elseif (
+			strpos($textarea, '.ru') !== false ||
+			strpos($textarea, 'youtube.com') !== false ||
+			strpos($textarea, 'youtu.be') !== false ||
+			strpos($textarea, 'porn') !== false ||
+			strpos($textarea, 'sex') !== false ||
+			strpos($textarea, 'SEO') !== false ||
+			strpos($textarea, 'PPC') !== false ||
+			strpos($textarea, 'crypto') !== false ||
+			strpos($textarea, 'http') !== false ||
+			strpos($textarea, 'www') !== false ||
+			strpos($textarea, '@') !== false ||
+			strpos($textarea, 'nutricompany') !== false
+		) {
+			$validation_result['is_valid'] = false;
+			
+			foreach( $form['fields'] as &$field ) {
+				if ( $field->id == '5' ) {
+					$field->failed_validation = true;
+					$field->validation_message = 'Contains invalid content! No spam, URLs, or email allowed';
+					break;
+				}
+			}
+		}
+	}
+
+	//Assign modified $form object back to the validation result
+	$validation_result['form'] = $form;
+	return $validation_result;
 }
