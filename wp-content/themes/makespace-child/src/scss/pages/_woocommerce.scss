@@ -977,6 +977,12 @@ $woo_green: #299E5F;
 		}
 	}
 }
+
+.woocommerce ul#shipping_method li input{
+	display: inline-block;
+	margin-right: 10px;
+	width: auto;
+}
 /* cart */
 // .woocommerce-message{
 // 	margin-bottom: 2rem;
