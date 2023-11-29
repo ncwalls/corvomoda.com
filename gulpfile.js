@@ -45,7 +45,7 @@ const concat       = require('gulp-concat')
 const jshint       = require('gulp-jshint')
 const notify       = require('gulp-notify')
 const postcss      = require('gulp-postcss')
-const sass         = require('gulp-sass')
+const sass         = require('gulp-sass')(require('sass'))
 const sourcemaps   = require('gulp-sourcemaps')
 const uglify       = require('gulp-uglify')
 const watch        = require('gulp-watch')
@@ -63,8 +63,8 @@ const logError = ( error ) => {
   this.emit('end')
 }
 
-gulp.task('font-awesome', () => { 
-  return gulp.src( './wp-content/themes/makespace-framework/includes/fontawesome-pro/web-fonts-with-css/webfonts/**.*' ) 
+gulp.task('font-awesome', () => {
+  return gulp.src( './wp-content/themes/makespace-framework/includes/fontawesome-pro/web-fonts-with-css/webfonts/**.*' )
     .pipe( gulp.dest( 'wp-content/themes/makespace-child/fonts' ) )
 })
 
@@ -84,19 +84,19 @@ gulp.task('lint', () => {
   }))
 })
 
-gulp.task('scripts', ['lint'], () => {
+gulp.task('scripts', gulp.series('lint', () => {
   return gulp.src([...builtInJavascript, ...scripts])
   .pipe(sourcemaps.init())
   .pipe(uglify().on('error', notify.onError('Error: <%= error.message %>')))
   .pipe(concat('wp-content/themes/makespace-child/scripts.min.js').on('error', notify.onError('Error: <%= error.message %>')))
   .pipe(sourcemaps.write('./'))
-  .pipe(gulp.dest(''))
-})
+  .pipe(gulp.dest('./'))
+}))
 
-gulp.task('scripts-watch', ['scripts'], (done) => {
+gulp.task('scripts-watch',  gulp.series('scripts', (done) => {
   browserSync.reload()
   done()
-})
+}))
 
 gulp.task('sass', () => {
   return gulp.src('wp-content/themes/makespace-child/src/scss/style.scss')
@@ -117,20 +117,21 @@ gulp.task('sass', () => {
     .pipe(browserSync.stream())
 })
 
-gulp.task('serve', ['font-awesome', 'sass', 'scripts'], () => {
+gulp.task('serve',  gulp.series('font-awesome', 'sass', 'scripts', (done) => {
   browserSync.init({
     proxy: localhostURL,
     snippetOptions: {
       ignorePaths: [localhostURLPathname + '/wp-admin/**']
     },
   })
-  gulp.watch('./wp-content/themes/makespace-child/src/scss/**', ['sass'])
-  gulp.watch('./wp-content/themes/makespace-child/src/js/**', ['scripts-watch'])
+  gulp.watch('./wp-content/themes/makespace-child/src/scss/**',  gulp.series('sass'))
+  gulp.watch('./wp-content/themes/makespace-child/src/js/**',  gulp.series('scripts-watch'))
   gulp.watch([
     'wp-content/themes/makespace-child/.gulpwatch',
     'wp-content/themes/makespace-child/*.php',
     'wp-content/themes/makespace-child/**/*.php'
   ]).on('change', browserSync.reload)
-})
+  done()
+}))
 
-gulp.task('default', ['serve'])
+gulp.task('default', gulp.series('serve'))
